@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 6 - Escape Room</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+   <div class="timer-container">
+        <span id="time">60:00</span>
+        <button id="pause-button">Pausar</button>
+        <button id="reset-button">Reiniciar</button>
+    </div>
+<<div class="chapter8-container">
+    <div class="monitor-frame">
+        <!-- Pantalla Futurista -->
+        <div class="monitor-screen">
+            <!-- Selección de Imagen Futurista -->
+            <div class="image-selection">
+                <h2>Selecciona una imagen</h2>
+                <div class="image-grid">
+                    <img src="images/11.png" alt="img1" class="code-image" data-code="img1">
+                    <img src="images/22.png" alt="img2" class="code-image" data-code="img2">
+                    <img src="images/33.png" alt="img3" class="code-image" data-code="img3">
+                    <img src="images/44.png" alt="img4" class="code-image" data-code="img4">
+                    <img src="images/55.png" alt="img5" class="code-image" data-code="img5">
+
+                </div>
+            </div>
+
+            <!-- Selección de Número -->
+            <div class="number-selection">
+                <h2>Selecciona un número</h2>
+                <div class="number-grid">
+                    <button class="code-number" data-code="1">1</button>
+                    <button class="code-number" data-code="2">2</button>
+                    <button class="code-number" data-code="3">3</button>
+                    <button class="code-number" data-code="4">4</button>
+                    <button class="code-number" data-code="5">5</button>
+                    <button class="code-number" data-code="6">6</button>
+                </div>
+            </div>
+
+            <!-- Selección de Letra -->
+            <div class="letter-selection">
+                <h2>Selecciona una letra</h2>
+                <div class="letter-grid">
+                    <button class="code-letter" data-code="A">A</button>
+                    <button class="code-letter" data-code="B">B</button>
+                    <button class="code-letter" data-code="C">C</button>
+                    <button class="code-letter" data-code="D">D</button>
+                    <button class="code-letter" data-code="E">E</button>
+                    <button class="code-letter" data-code="F">F</button>
+                </div>
+            </div>
+
+            <!-- Mensaje de Resultado -->
+            <div id="result-message"></div>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="scripts.js"></script>
+</body>
+</html>
