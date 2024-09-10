@@ -54,6 +54,20 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+document.addEventListener('DOMContentLoaded', () => {
+    const particles = 30; // Número de partículas
+    const container = document.querySelector('body');
+
+    for (let i = 0; i < particles; i++) {
+        let particle = document.createElement('div');
+        particle.classList.add('particle');
+        particle.style.left = `${Math.random() * 100}vw`;
+        particle.style.animationDuration = `${Math.random() * 5 + 5}s`;
+        particle.style.width = `${Math.random() * 4 + 2}px`;
+        particle.style.height = particle.style.width;
+        container.appendChild(particle);
+    }
+});
 
     // --- Botón "Comenzar la Aventura" ---
     const startButton = document.getElementById('start-button');
@@ -382,4 +396,84 @@ document.addEventListener('DOMContentLoaded', () => {
       resultMessage.textContent = ''; // Limpiamos el mensaje
     }, 1000);
   }
+});
+
+
+
+
+
+
+
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    let selectedImage = '';
+    let selectedNumber = '';
+    let selectedLetter = '';
+
+    const correctImage = 'img3';  // Imagen correcta
+    const correctNumber = '4';    // Número correcto
+    const correctLetter = 'A';    // Letra correcta
+
+    const resultMessage = document.getElementById('result-message');
+
+    // Selección de Imagen
+    document.querySelectorAll('.code-image').forEach(image => {
+        image.addEventListener('click', () => {
+            selectedImage = image.dataset.code;
+            document.querySelectorAll('.code-image').forEach(img => img.classList.remove('selected'));
+            image.classList.add('selected');
+            checkCode();
+        });
+    });
+
+    // Selección de Número
+    document.querySelectorAll('.code-number').forEach(number => {
+        number.addEventListener('click', () => {
+            selectedNumber = number.dataset.code;
+            document.querySelectorAll('.code-number').forEach(num => num.classList.remove('selected'));
+            number.classList.add('selected');
+            checkCode();
+        });
+    });
+
+    // Selección de Letra
+    document.querySelectorAll('.code-letter').forEach(letter => {
+        letter.addEventListener('click', () => {
+            selectedLetter = letter.dataset.code;
+            document.querySelectorAll('.code-letter').forEach(let => let.classList.remove('selected'));
+            letter.classList.add('selected');
+            checkCode();
+        });
+    });
+
+    // Función para comprobar el código
+    function checkCode() {
+        if (selectedImage && selectedNumber && selectedLetter) {
+            if (selectedImage === correctImage && selectedNumber === correctNumber && selectedLetter === correctLetter) {
+                resultMessage.textContent = "¡Código correcto!";
+                resultMessage.style.color = "green";
+                setTimeout(() => {
+                    window.location.href = 'chapter9.html';  // Redirige al siguiente capítulo
+                }, 2000);
+            } else {
+                resultMessage.textContent = "Código incorrecto. Intenta de nuevo.";
+                resultMessage.style.color = "red";
+                resetSelections();
+            }
+        }
+    }
+
+    // Función para reiniciar las selecciones
+    function resetSelections() {
+        selectedImage = '';
+        selectedNumber = '';
+        selectedLetter = '';
+
+        // Quitar selección visual
+        document.querySelectorAll('.code-image').forEach(img => img.classList.remove('selected'));
+        document.querySelectorAll('.code-number').forEach(num => num.classList.remove('selected'));
+        document.querySelectorAll('.code-letter').forEach(let => let.classList.remove('selected'));
+    }
 });
