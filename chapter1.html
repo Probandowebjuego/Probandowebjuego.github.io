@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escape Room - Capítulo 1</title>
+    <!-- Enlace al archivo de CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="chapter1-bg"> <!-- Aplicamos una clase específica para este capítulo -->
+
+    <!-- Sección del primer juego: Selección de pociones -->
+    <section id="chapter1">
+
+    <!-- Contenedor del temporizador -->
+    <div class="timer-container">
+        <span id="time">60:00</span>
+        <button id="pause-button">Pausar</button>
+        <button id="reset-button">Reiniciar</button>
+    </div>
+        <h1>Selecciona las 3 pociones correctas</h1>
+        <div class="bottles-container">
+            <div class="bottle" id="bottle-rosa" data-color="rosa"></div>
+            <div class="bottle" id="bottle-naranja" data-color="naranja"></div>
+            <div class="bottle" id="bottle-rojo" data-color="rojo"></div>
+            <div class="bottle" id="bottle-amarillo" data-color="amarillo"></div>
+            <div class="bottle" id="bottle-azul" data-color="azul"></div>
+            <div class="bottle" id="bottle-verde" data-color="verde"></div>
+        </div>
+        <button id="validate-button">Validar Selección</button>
+        <div id="result-message"></div>
+    </section>
+
+    <!-- Script para la funcionalidad -->
+    <script src="scripts.js"></script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 3 - Código de 4 Letras</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="chapter4-bg">
+  <!-- Contenedor del temporizador -->
+    <div class="timer-container">
+        <span id="time">60:00</span>
+        <button id="pause-button">Pausar</button>
+        <button id="reset-button">Reiniciar</button>
+    </div>
+<div class="buttons-container">
+    <div class="option-button" id="button-left" data-correct="false">
+        <img src="images/icono1.png" alt="Imagen 1">
+    </div>
+    <div class="option-button" id="button-middle" data-correct="true">
+        <img src="images/icono2.png" alt="Boron">
+    </div>
+    <div class="option-button" id="button-right" data-correct="false">
+        <img src="images/icono3.png" alt="Imagen 2">
+    </div>
+</div>
+
+<div id="result-message"></div>
+
+
+    <script src="scripts.js"></script>
+</body>
+</html>
