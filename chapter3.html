@@ -7,12 +7,41 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body class="chapter3-bg">
-  <!-- Contenedor del temporizador -->
-    <div class="timer-container">
-        <span id="time">60:00</span>
-        <button id="pause-button">Pausar</button>
-        <button id="reset-button">Reiniciar</button>
+  <!-- Banner fijo con temporizador y botón de pistas -->
+    <div class="banner-container">
+        <!-- Botón de pistas a la izquierda -->
+        <button id="hint-button" class="hint-button">💡 Ver Pistas</button>
+
+        <!-- Temporizador a la derecha con botones en la misma línea -->
+        <div class="timer-container">
+            <span id="time">45:39</span>
+            <div class="timer-buttons">
+                <button id="pause-button" class="icon-button">⏸️</button>
+                <button id="reset-button" class="icon-button">🔄</button>
+            </div>
+        </div>
     </div>
+
+    <!-- Modal de Pistas -->
+    <div id="hint-modal" class="modal">
+        <div class="modal-content">
+            <span id="close-hint" class="close">&times;</span>
+            <h2>Pistas</h2>
+            <ul id="hints-list">
+                <!-- Las pistas se agregarán aquí -->
+            </ul>
+            <button id="show-next-hint">Mostrar Siguiente Pista</button>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
 <div id="code-display">****</div>
 
 <div class="keys-container">
@@ -40,6 +69,7 @@
 <button id="validate-button">Validar</button>
 
 <div id="result-message"></div>
+
 
 
     <script src="scripts.js"></script>

@@ -1,21 +1,160 @@
-/* General */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+/* Banner superior fijo */
+/* Banner superior fijo */
+.banner-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.9);
+    padding: 10px 20px;
+    z-index: 1000;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: #1e272e;
-    color: #ffffff;
-    overflow-x: hidden;
-    height: 100vh;
+/* Botón de pistas */
+.hint-button {
+    background-color: #3498db;
+    padding: 8px 20px;
+    font-size: 1rem;
+    border-radius: 30px;
+    font-weight: bold;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
+    box-shadow: 0 4px 10px rgba(52, 152, 219, 0.5);
+    transition: background-color 0.3s, transform 0.3s;
+    cursor: pointer;
 }
+
+.hint-button:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+}
+
+/* Temporizador a la derecha */
+.timer-container {
+    display: flex;
+    align-items: center;
+    color: #ffffff;
+}
+
+#time {
+    font-size: 1.6rem;
+    font-family: 'Orbitron', sans-serif;
+    margin-right: 10px;
+    color: #1abc9c;
+}
+
+/* Botones de control en línea */
+.timer-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.icon-button {
+    background-color: #3498db;  /* Color de fondo */
+    color: #ffffff;  /* Color del texto */
+    border: none;  /* Sin bordes */
+    padding: 12px 16px;  /* Aumenté el padding para un diseño más espacioso */
+    cursor: pointer;  /* Icono de cursor de mano */
+    border-radius: 12px;  /* Esquinas más redondeadas */
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;  /* Transiciones suaves */
+    font-size: 1.2rem;  /* Tamaño de fuente más grande */
+    display: flex;  /* Flexbox para alinear el contenido */
+    align-items: center;  /* Alineación vertical centrada */
+    justify-content: center;  /* Alineación horizontal centrada */
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);  /* Sombra suave alrededor del botón */
+}
+
+.icon-button:hover {
+    background-color: #2980b9;  /* Color más oscuro al pasar el cursor */
+    transform: translateY(-4px);  /* Efecto de levantar el botón */
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.25);  /* Sombra más intensa cuando se hace hover */
+}
+
+.icon-button:active {
+    transform: translateY(2px);  /* Efecto de presionar hacia abajo cuando se hace clic */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);  /* Sombra más suave cuando el botón está activo */
+}
+
+
+/* Modal de pistas */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1001;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background-color: #2c3e50;
+    color: #ecf0f1;
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 15px;
+    width: 70%;
+    max-width: 400px;
+    box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+/* Botón de cerrar el modal */
+.close {
+    color: #fff;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 22px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: #f39c12;
+    text-decoration: none;
+}
+
+/* Estilos para las pistas */
+ul#hints-list {
+    list-style-type: none;
+    padding-left: 0;
+    margin-bottom: 10px;
+}
+
+ul#hints-list li {
+    margin: 8px 0;
+    display: none;
+    background-color: #34495e;
+    padding: 8px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    color: #ecf0f1;
+}
+
+/* Botón para mostrar más pistas */
+#show-next-hint {
+    margin-top: 10px;
+    background-color: #1abc9c;
+    border-radius: 20px;
+    padding: 8px 15px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    color: #ffffff;
+    border: none;
+}
+
+#show-next-hint:hover {
+    background-color: #16a085;
+}
+
+
 
 /* Fondo */
 .background {
@@ -30,24 +169,8 @@ body {
     z-index: -1;
 }
 
-/* Temporizador */
-.timer-container {
-    position: fixed;
-    top: 10px;
-    right: 10px;
-    font-size: 1.2rem;
-    color: #ffffff;
-    background-color: rgba(0, 0, 0, 0.7);
-    padding: 8px 16px;
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
-    z-index: 10;
-    text-align: center;
-    max-width: 120px;
-}
 
 /* Pantalla de introducción */
-/* Fondo animado para un toque futurista */
 body.intro-bg {
     background: radial-gradient(circle, #1b1b1b, #101010, #050505);
     background-size: cover;
@@ -56,7 +179,7 @@ body.intro-bg {
     position: relative;
 }
 
-/* Efecto de partículas para dar dinamismo */
+/* Efecto de partículas */
 @keyframes particles {
     0% { transform: translateY(0); opacity: 1; }
     100% { transform: translateY(-200px); opacity: 0; }
@@ -73,7 +196,7 @@ body.intro-bg {
     animation: particles 4s linear infinite;
 }
 
-/* Texto del título y subtítulo con animaciones */
+/* Texto del título */
 #title {
     font-size: 4rem;
     color: #00ffcc;
@@ -81,14 +204,14 @@ body.intro-bg {
     text-transform: uppercase;
     letter-spacing: 8px;
     text-shadow: 0 0 10px #00ffcc, 0 0 20px rgba(0, 255, 204, 0.8);
-    opacity: 0; /* Inicia oculto para animar entrada */
+    opacity: 0;
 }
 
 #subtitle {
     font-size: 1.5rem;
     color: #ffffff;
     margin-top: 20px;
-    animation: fadeIn 2s ease-in-out forwards 1s; /* Aparece después del título */
+    animation: fadeIn 2s ease-in-out forwards 1s;
     opacity: 0;
     letter-spacing: 2px;
 }
@@ -99,9 +222,9 @@ body.intro-bg {
     100% { opacity: 1; transform: translateY(0); }
 }
 
-/* Botón de inicio con animaciones interactivas */
+/* Botón de inicio con animaciones */
 #start-button {
-    background-color: #00ffcc;
+    background-color: #BLACK;
     color: black;
     padding: 20px 50px;
     font-size: 1.5rem;
@@ -110,7 +233,7 @@ body.intro-bg {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.3s ease;
-    animation: fadeIn 2.5s ease-in-out forwards 2s; /* Aparece después del subtítulo */
+    animation: fadeIn 2.5s ease-in-out forwards 2s;
     opacity: 0;
     box-shadow: 0 0 15px rgba(0, 255, 204, 0.5), 0 0 30px rgba(0, 255, 204, 0.8);
     text-transform: uppercase;
@@ -124,7 +247,6 @@ body.intro-bg {
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.6), 0 0 50px rgba(0, 255, 204, 1);
 }
 
-/* Animación flotante para la introducción */
 .intro-container {
     text-align: center;
     max-width: 600px;
@@ -137,14 +259,13 @@ body.intro-bg {
     animation: float 6s ease-in-out infinite;
 }
 
-/* Animación de flotación suave */
+/* Animación flotante suave */
 @keyframes float {
     0% { transform: translateY(0); }
     50% { transform: translateY(-10px); }
     100% { transform: translateY(0); }
 }
 
-/* Efecto de resplandor en el contorno */
 .intro-container::before {
     content: '';
     position: absolute;
@@ -157,7 +278,7 @@ body.intro-bg {
     z-index: -1;
 }
 
-/* Partículas de fondo */
+/* Partículas flotantes */
 @keyframes particleMotion {
     0% { transform: translateY(0); opacity: 1; }
     100% { transform: translateY(-800px); opacity: 0; }
@@ -172,31 +293,42 @@ body.intro-bg {
     animation: particleMotion 10s linear infinite;
 }
 
-@keyframes particleMotion {
-    0% { transform: translateY(0); opacity: 1; }
-    100% { transform: translateY(-500px); opacity: 0; }
-}
-
 .particle:nth-child(1) { left: 10%; animation-delay: 1s; }
 .particle:nth-child(2) { left: 20%; animation-delay: 2s; }
 .particle:nth-child(3) { left: 30%; animation-delay: 3s; }
 .particle:nth-child(4) { left: 40%; animation-delay: 4s; }
 .particle:nth-child(5) { left: 50%; animation-delay: 5s; }
 
-
-/* Animación fade-in */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-20px);
+/* Responsiveness para dispositivos móviles */
+@media (max-width: 768px) {
+    #start-button {
+        padding: 15px 40px;
+        font-size: 1.2rem;
     }
-    to {
-        opacity: 1;
-        transform: translateY(0);
+
+    #title {
+        font-size: 3rem;
+    }
+
+    #subtitle {
+        font-size: 1.2rem;
+    }
+
+    .timer-container {
+        font-size: 1rem;
+        padding: 5px 10px;
     }
 }
 
-/* Botellas en chapter 1 */
+
+/* Colores y efectos mejorados para capítulos posteriores */
+body.chapter2-bg, body.chapter3-bg, body.chapter6-bg {
+    background-color: #101010;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+/* Botellas en Chapter 1 */
 .bottles-container {
     display: flex;
     justify-content: center;
@@ -206,20 +338,75 @@ body.intro-bg {
     margin-top: 50px;
 }
 
+/* Colores de las botellas */
+#bottle-rosa {
+    background-color: #e91e63;
+}
+
+#bottle-naranja {
+    background-color: #ff9800;
+}
+
+#bottle-rojo {
+    background-color: #f44336;
+}
+
+#bottle-amarillo {
+    background-color: #ffeb3b;
+}
+
+#bottle-azul {
+    background-color: #2196f3;
+}
+
+#bottle-verde {
+    background-color: #4caf50;
+}
+
 .bottle {
     width: 100px;
     height: 160px;
-    background-color: #e74c3c;
     border-radius: 10px 10px 30px 30px;
     cursor: pointer;
     transition: transform 0.3s ease, box-shadow 0.3s ease, border 0.3s ease;
     position: relative;
     overflow: hidden;
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.4));
+    transform-origin: center bottom;
+}
+
+.bottle:hover {
+    transform: scale(1.1);
+    box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.5);
 }
 
 .bottle.selected {
     border: 5px solid #ffffff;
     box-shadow: 0px 8px 20px rgba(255, 255, 255, 0.4);
+    transform: scale(1.2);
+}
+
+/* Animación de explosión para la poción incorrecta */
+@keyframes explosion {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.5);
+        opacity: 0.6;
+    }
+    100% {
+        transform: scale(2);
+        opacity: 0;
+    }
+}
+
+.bottle.error {
+    animation: explosion 0.6s ease forwards;
+    background-color: #e74c3c; /* Rojo para representar la explosión */
+    box-shadow: 0px 0px 20px rgba(255, 0, 0, 0.8);
+    border: 5px solid #ffffff;
 }
 
 /* Mensaje de resultado */
@@ -234,6 +421,7 @@ body.intro-bg {
     max-width: 80%;
     margin: 20px auto;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    animation: pulse 1.5s infinite alternate;
 }
 
 /* Botón de validación */
@@ -248,83 +436,69 @@ body.intro-bg {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 0 15px rgba(39, 174, 96, 0.6);
 }
 
 #validate-button:hover {
     background-color: #2ecc71;
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 8px 15px rgba(0, 255, 204, 0.8);
+    transform: scale(1.05);
 }
 
-/* Colores de las botellas */
-#bottle-rosa { background-color: #e91e63; }
-#bottle-naranja { background-color: #ff9800; }
-#bottle-rojo { background-color: #f44336; }
-#bottle-amarillo { background-color: #ffeb3b; }
-#bottle-azul { background-color: #2196f3; }
-#bottle-verde { background-color: #4caf50; }
-
-/* Responsiveness para dispositivos móviles */
-@media (max-width: 768px) {
-    .bottle {
-        width: 80px;
-        height: 120px;
-    }
-
-    #validate-button {
-        font-size: 1.2rem;
-        padding: 10px 20px;
-    }
-
-    #result-message {
-        font-size: 1.4rem;
-        padding: 10px;
-    }
-
-    .timer-container {
-        font-size: 1rem;
-        padding: 5px 10px;
-    }
+/* Efecto de animación pulsante */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.05); }
 }
 
-/* Fondo oscuro del laboratorio para el Chapter 2 */
+
+/* Chapter 2: Interruptores */
 body.chapter2-bg {
     background: url('images/3.jpg') no-repeat center center fixed;
     background-size: cover;
-    filter: brightness(0.3); /* Luz tenue */
+    filter: brightness(0.3);
 }
 
-/* Panel de control con disposición horizontal */
+/* Panel de control */
 .panel-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 40px; /* Ajusta el espacio entre interruptores */
+    gap: 40px;
     padding: 20px;
 }
 
-/* Interruptores grises */
 .switch {
     width: 80px;
     height: 260px;
-    background-color: #7f8c8d; /* Color gris */
+    background-color: #7f8c8d;
     border-radius: 10px;
     cursor: pointer;
     position: relative;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
     transition: transform 0.3s ease, background-color 0.3s ease;
-    border: 3px solid #95a5a6; /* Borde del interruptor */
-    margin: 10px; /* Para que no se vean pegados */
-     display:inline-block;
+    border: 3px solid #95a5a6;
+    display: inline-block;
 }
 
-/* Efecto al subir el interruptor */
 .switch.up {
-    background-color: #2ecc71; /* Verde al activarse */
-    transform: translateY(-30px); /* Simula que el interruptor se levanta */
+    background-color: #2ecc71;
+    transform: translateY(-30px);
     box-shadow: 0 8px 15px rgba(46, 204, 113, 0.6);
 }
 
-/* Cables de colores */
+.switch:hover {
+    background-color: #bdc3c7;
+    box-shadow: 0 8px 20px rgba(255, 255, 255, 0.1);
+}
+
+/* Interruptores activados */
+body.light-on .switch.up {
+    background-color: #27ae60;
+    box-shadow: 0 8px 15px rgba(46, 204, 113, 0.8);
+}
+
+/* Efecto al mover los interruptores */
 .switch::before {
     content: '';
     position: absolute;
@@ -335,43 +509,37 @@ body.chapter2-bg {
     background-color: #7f8c8d;
     border-radius: 5px;
     transform: translateX(-50%);
-
+    transition: background-color 0.3s ease;
 }
 
-#switch-blue::before { background-color: #3498db; }  /* Cable azul */
-#switch-red::before { background-color: #e74c3c; }   /* Cable rojo */
-#switch-yellow::before { background-color: #f1c40f; } /* Cable amarillo */
-#switch-green::before { background-color: #2ecc71; }  /* Cable verde */
+#switch-blue::before { background-color: #3498db; }
+#switch-red::before { background-color: #e74c3c; }
+#switch-yellow::before { background-color: #f1c40f; }
+#switch-green::before { background-color: #2ecc71; }
 
-/* Sacudir la pantalla al hacer clic incorrectamente */
-@keyframes shakeScreen {
+/* Efectos de error */
+.switch.error {
+    background-color: #e74c3c;
+    animation: shakeSwitch 0.5s ease;
+}
+
+@keyframes shakeSwitch {
     0%, 100% { transform: translateX(0); }
     25% { transform: translateX(-10px); }
     50% { transform: translateX(10px); }
     75% { transform: translateX(-10px); }
 }
 
+/* Sacudir la pantalla completa al error */
 body.shake {
     animation: shakeScreen 0.5s ease;
 }
 
-/* Efecto de luz encendida */
-body.light-on {
-    filter: brightness(1.2);
-    transition: filter 1s ease;
-}
-
-/* Efecto hover para los interruptores */
-.switch:hover {
-    background-color: #bdc3c7;
-    box-shadow: 0 8px 20px rgba(255, 255, 255, 0.1);
-}
-
-/* Efecto al activar todos los interruptores correctamente */
-body.light-on .switch.up {
-    background-color: #2ecc71; /* Verde para los interruptores activados */
-    transform: translateY(-30px);
-    box-shadow: 0 8px 15px rgba(46, 204, 113, 0.8);
+@keyframes shakeScreen {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    50% { transform: translateX(10px); }
+    75% { transform: translateX(-10px); }
 }
 
 /* Indicador de código */
@@ -386,33 +554,13 @@ body.light-on .switch.up {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
 }
 
-/* Efecto de error en los interruptores */
-.switch.error {
-    background-color: #e74c3c; /* Rojo si el interruptor es incorrecto */
-    animation: shakeSwitch 0.5s ease;
+/* Luz al activar todos los interruptores */
+body.light-on {
+    filter: brightness(1.2);
+    transition: filter 1s ease;
 }
 
-/* Animación de sacudida para el interruptor en error */
-@keyframes shakeSwitch {
-    0%, 100% { transform: translateX(0); }
-    25% { transform: translateX(-10px); }
-    50% { transform: translateX(10px); }
-    75% { transform: translateX(-10px); }
-}
-
-/* Sacudir la pantalla completa al error */
-@keyframes shakeScreen {
-    0%, 100% { transform: translateX(0); }
-    25% { transform: translateX(-10px); }
-    50% { transform: translateX(10px); }
-    75% { transform: translateX(-10px); }
-}
-
-body.flash {
-    animation: shakeScreen 0.5s ease;
-}
-
-/* Efecto de destello y cambio completo de pantalla al hacer clic correctamente */
+/* Animación de destello */
 @keyframes flashSuccess {
     0% { filter: brightness(1); }
     50% { filter: brightness(3); }
@@ -424,46 +572,15 @@ body.light-on {
     transition: filter 1s ease;
 }
 
-/* Botón de pausar y reiniciar temporizador */
-#pause-button, #reset-button {
-    background-color: #e74c3c;
-    color: white;
-    border: none;
-    padding: 8px 15px;
-    cursor: pointer;
-    margin-top: 5px;
-    border-radius: 5px;
-}
 
-#pause-button:hover, #reset-button:hover {
-    background-color: #c0392b;
-}
 
-/* Responsiveness para dispositivos móviles */
-@media (max-width: 768px) {
-    .switch {
-        width: 60px;
-        height: 120px;
-    }
-
-    .panel-container {
-        flex-direction: column;
-    }
-
-    .timer-container {
-        font-size: 1rem;
-        padding: 5px 10px;
-    }
-}
-
-/* Chapter 3 specific styles */
+/* Chapter 3: Pantalla del código */
 body.chapter3-bg {
     background: radial-gradient(circle at center, #0f0f0f, #1e272e);
     background-size: cover;
     background-attachment: fixed;
 }
 
-/* Pantalla del código */
 #code-display {
     font-size: 3rem;
     text-align: center;
@@ -480,13 +597,13 @@ body.chapter3-bg {
     animation: flicker 1.5s infinite alternate;
 }
 
-/* Efecto de parpadeo para la pantalla del código */
+/* Efecto de parpadeo */
 @keyframes flicker {
     0% { opacity: 1; }
     100% { opacity: 0.9; }
 }
 
-/* Contenedor de teclas */
+/* Teclas del teclado */
 .keys-container {
     display: grid;
     grid-template-columns: repeat(4, 80px);
@@ -495,7 +612,6 @@ body.chapter3-bg {
     margin-bottom: 20px;
 }
 
-/* Estilo de cada tecla */
 .key {
     width: 80px;
     height: 80px;
@@ -506,25 +622,23 @@ body.chapter3-bg {
     text-align: center;
     line-height: 80px;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
     box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
     border: 2px solid #34495e;
 }
 
-/* Efecto cuando la tecla se presiona */
 .key:active {
     transform: scale(0.95);
     background-color: #1abc9c;
     box-shadow: 0px 4px 20px rgba(0, 255, 255, 0.4);
 }
 
-/* Efecto hover para las teclas */
 .key:hover {
     background-color: #34495e;
     box-shadow: 0px 4px 15px rgba(0, 255, 255, 0.4);
 }
 
-/* Botón de validar */
+/* Validación del código */
 #validate-button {
     display: inline-block;
     background-color: #e74c3c;
@@ -541,9 +655,10 @@ body.chapter3-bg {
 #validate-button:hover {
     background-color: #c0392b;
     box-shadow: 0px 4px 15px rgba(231, 76, 60, 0.4);
+    transform: scale(1.05);
 }
 
-/* Resultado de mensaje de error o acierto */
+/* Resultado de la validación */
 #result-message {
     font-size: 1.8rem;
     margin-top: 20px;
@@ -554,23 +669,69 @@ body.chapter3-bg {
     border-radius: 10px;
     max-width: 80%;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    animation: pulse 1.5s infinite alternate;
+}
+/* Contenedor general del capítulo */
+.chapter4-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #1e272e;
+    overflow: hidden;
 }
 
-/* Capítulo 4: Humo completo */
+/* Estilo para los botones de opciones */
+.buttons-container {
+    display: flex;
+    gap: 20px;
+}
+
+.option-button {
+    border: 2px solid #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.option-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+}
+
+/* Mensaje de resultado */
+#result-message {
+    font-size: 1.8rem;
+    margin-top: 30px;
+    color: #ffffff;
+    text-align: center;
+    background-color: rgba(231, 76, 60, 0.8);
+    padding: 10px 20px;
+    border-radius: 10px;
+    max-width: 80%;
+    margin: 20px auto;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+/* Efecto de humo a pantalla completa */
 .full-screen-smoke {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(50, 50, 50, 0.9); /* Color del humo */
+    background-color: rgba(50, 50, 50, 0.9);
     z-index: 20;
-    display: flex;
+    display: none; /* Se muestra solo en caso de error */
     justify-content: center;
     align-items: center;
     overflow: hidden;
+    animation: closeEyes 10s ease forwards;
 }
 
+/* Nubes de humo */
 .smoke-cloud {
     width: 300px;
     height: 300px;
@@ -581,19 +742,38 @@ body.chapter3-bg {
 }
 
 @keyframes moveSmoke {
-    0% {
-        transform: translateX(0) translateY(0) scale(1);
-        opacity: 0.6;
-    }
-    50% {
-        transform: translateX(30px) translateY(-50px) scale(1.2);
-        opacity: 0.4;
-    }
-    100% {
-        transform: translateX(-30px) translateY(50px) scale(1);
-        opacity: 0.6;
-    }
+    0% { transform: translateX(0) translateY(0) scale(1); opacity: 0.6; }
+    50% { transform: translateX(30px) translateY(-50px) scale(1.2); opacity: 0.4; }
+    100% { transform: translateX(-30px) translateY(50px) scale(1); opacity: 0.6; }
 }
+
+/* Variaciones en las nubes de humo */
+.smoke-cloud:nth-child(2) {
+    animation-duration: 6s;
+    width: 250px;
+    height: 250px;
+}
+
+.smoke-cloud:nth-child(3) {
+    animation-duration: 4s;
+    width: 280px;
+    height: 280px;
+}
+
+.smoke-cloud:nth-child(4) {
+    animation-duration: 8s;
+    width: 320px;
+    height: 320px;
+}
+
+/* Animación de cerrar ojos */
+@keyframes closeEyes {
+    0% { background-color: rgba(50, 50, 50, 0.9); }
+    50% { background-color: rgba(0, 0, 0, 0.95); }
+    100% { background-color: rgba(0, 0, 0, 1); }
+}
+
+
 
 /* Capítulo 5: Estilos para los diales de la caja fuerte */
 /* Estilos para los diales de la caja fuerte */
@@ -738,41 +918,49 @@ body.light-on .safe-container {
 }
 
 
-/* Capítulo 6: Escritura de pluma simulada */
 
-/* Estilo para el fondo */
-@font-face {
-    font-family: 'Dancing Script';
-    src: url('./fonts/DancingScript-Regular.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
-
+/* Contenedor general */
 body.chapter6-bg {
-    background-image: url('./images/parchment.jpg');
+    background-image: url('images/papel.avif');
     background-size: cover;
     background-position: center;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    overflow: hidden;
+    color: #4b3832; /* Tono marrón para texto antiguo */
 }
 
-/* Estilo del contenedor del manuscrito */
+/* Estilo del manuscrito */
 .manuscript-container {
-    width: 80%;
+    width: 90%;
     max-width: 800px;
     padding: 40px;
-    background-color: rgba(250, 250, 210, 0.8);
-    border-radius: 10px;
+    background-color: rgba(235, 222, 200, 0.9); /* Color de pergamino */
+    border-radius: 15px;
     box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
-    font-family: 'Dancing Script', cursive;
+    font-family: 'Cormorant Garamond', serif; /* Fuente clásica */
     font-size: 1.5rem;
-    text-align: center;
+    text-align: justify;
     line-height: 1.8;
-    position: relative;
+    border: 2px solid #7f8c8d; /* Borde de color antiguo */
 }
 
+/* Efecto de borde gastado */
+.manuscript-container:before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    border: 2px solid rgba(235, 222, 200, 0.5); /* Efecto de pergamino gastado */
+    filter: blur(8px);
+    z-index: -1;
+}
+
+/* Texto de escritura */
 .manuscript {
     font-family: 'Dancing Script', cursive;
     font-size: 2rem;
@@ -785,52 +973,56 @@ body.chapter6-bg {
     height: 100px;
     padding: 10px;
     box-sizing: border-box;
+    background-color: transparent;
+    border-bottom: 2px solid #7f8c8d; /* Línea de escritura */
 }
 
-/* Estilo del botón de validar */
+/* Botón de validación estilizado */
 #validate-button {
-    background-color: #3498db;
-    color: white;
-    padding: 10px 20px;
-    font-size: 1.2rem;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-top: 20px;
+    background-color: #4b3832; /* Color de fondo inicial */
+    color: white; /* Color del texto */
+    padding: 12px 25px; /* Aumenté ligeramente el padding para hacerlo más espacioso */
+    font-size: 1.4rem; /* Aumenté el tamaño de la fuente para mayor legibilidad */
+    border: none; /* Sin bordes */
+    border-radius: 30px; /* Esquinas redondeadas para un aspecto más suave */
+    cursor: pointer; /* Cursor de mano */
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; /* Transiciones suaves */
+    margin-top: 20px; /* Separación superior */
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2); /* Sombra suave alrededor */
+    font-weight: bold; /* Texto en negrita para mayor énfasis */
+    letter-spacing: 1px; /* Espaciado entre letras */
 }
 
 #validate-button:hover {
-    background-color: #2980b9;
+    background-color: #3d2926; /* Color más oscuro al pasar el cursor */
+    transform: translateY(-4px); /* Efecto de elevación al hacer hover */
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.25); /* Sombra más intensa al hacer hover */
 }
 
-/* Efecto de tinta para el manuscrito */
-@keyframes fadeInInk {
-    0% { opacity: 0; transform: scale(0.95); }
-    100% { opacity: 1; transform: scale(1); }
-}
-
-/* Mensaje de resultado */
-#result-message {
-    font-size: 1.5rem;
-    margin-top: 15px;
-    color: red;
-}
-
-/* Estilo de desvanecimiento si la frase es incorrecta */
-@keyframes fadeOutInk {
-    0% { opacity: 1; transform: scale(1); }
-    100% { opacity: 0; transform: scale(1.05); }
-}
-
-/* Efecto de desvanecimiento del texto */
-.manuscript.fade-out {
-    animation: fadeOutInk 1.5s forwards;
+#validate-button:active {
+    transform: translateY(2px); /* Efecto de "presionar" cuando se hace clic */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Sombra más suave cuando el botón está activo */
 }
 
 
+/* Responsiveness */
+@media (max-width: 768px) {
+    .manuscript-container {
+        padding: 20px;
+        font-size: 1.2rem;
+    }
 
-/* Container General */
+    .manuscript {
+        font-size: 1.5rem;
+    }
+
+    #validate-button {
+        font-size: 1rem;
+        padding: 8px 16px;
+    }
+}
+
+/* Chapter 7: Teclado numérico y ranuras */
 .container {
   display: flex;
   flex-direction: column;
@@ -841,7 +1033,6 @@ body.chapter6-bg {
   padding: 20px;
 }
 
-/* Contenedor de las hendiduras */
 .slot-container {
   display: flex;
   justify-content: center;
@@ -856,10 +1047,15 @@ body.chapter6-bg {
   border-radius: 10px;
   background-color: #264653;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-/* Contenedor del teclado */
+.slot:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 15px rgba(244, 162, 97, 0.8);
+}
+
+/* Teclado */
 .keypad-container {
   display: grid;
   grid-template-columns: repeat(6, 80px);
@@ -868,7 +1064,6 @@ body.chapter6-bg {
   margin-top: 20px;
 }
 
-/* Estilo de las teclas */
 .key {
   width: 80px;
   height: 80px;
@@ -888,19 +1083,33 @@ body.chapter6-bg {
   background-color: #f4a261;
 }
 
-#error-message {
-  color: red;
-  font-size: 1.2rem;
-  margin-top: 20px;
+.key:hover {
+  background-color: #e9c46a;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
-/* Animación para mover las teclas */
+/* Efecto para mover las teclas al presionarlas */
 .moving {
   transition: transform 0.5s ease-out;
 }
 
-/* ---- Media Queries ---- */
-/* Para pantallas de hasta 768px de ancho (tablets y móviles) */
+#error-message {
+  color: red;
+  font-size: 1.2rem;
+  margin-top: 20px;
+  animation: shake 0.5s ease;
+}
+
+/* Animación de sacudida para el mensaje de error */
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-5px); }
+  100% { transform: translateX(0); }
+}
+
+/* Responsiveness para pantallas pequeñas */
 @media (max-width: 768px) {
   .slot {
     width: 60px;
@@ -914,12 +1123,11 @@ body.chapter6-bg {
   }
 
   .keypad-container {
-    grid-template-columns: repeat(5, 60px); /* Ajustamos a 5 columnas */
-    grid-gap: 10px; /* Reducimos el espacio entre teclas */
+    grid-template-columns: repeat(5, 60px);
+    grid-gap: 10px;
   }
 }
 
-/* Para pantallas de hasta 480px de ancho (móviles pequeños) */
 @media (max-width: 480px) {
   .slot {
     width: 50px;
@@ -933,7 +1141,7 @@ body.chapter6-bg {
   }
 
   .keypad-container {
-    grid-template-columns: repeat(4, 50px); /* Ajustamos a 4 columnas */
+    grid-template-columns: repeat(4, 50px);
     grid-gap: 8px;
   }
 
@@ -942,146 +1150,470 @@ body.chapter6-bg {
   }
 }
 
-
-
-/* Contenedor General */
+/* Chapter 8: Pantalla futurista */
 .chapter8-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #1e272e;
-    padding: 20px;
-    height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #1e272e;
+  padding: 20px;
+  height: 100vh;
 }
 
-/* Efecto de Monitor Futurista */
 .monitor-frame {
-    border: 8px solid #00ffcc;
-    border-radius: 15px;
-    box-shadow: 0 0 30px rgba(0, 255, 204, 0.8);
-    width: 90%;
-    max-width: 900px;
-    background-color: #1b1b1b;
+  border: 8px solid #00ffcc;
+  border-radius: 15px;
+  box-shadow: 0 0 30px rgba(0, 255, 204, 0.8);
+  width: 90%;
+  max-width: 900px;
+  background-color: #1b1b1b;
 }
 
 .monitor-screen {
-    padding: 20px;
-    background-color: #000000;
-    border-radius: 8px;
-    text-align: center;
-    color: white;
+  padding: 20px;
+  background-color: #000000;
+  border-radius: 8px;
+  text-align: center;
+  color: white;
 }
 
-/* Títulos */
+/* Títulos y selecciones */
 h2 {
-    font-size: 1.8rem;
-    text-align: center;
-    color: #00ffcc;
-    font-family: 'Orbitron', sans-serif;
+  font-size: 1.8rem;
+  text-align: center;
+  color: #0a0a0a;
+  font-family: 'Orbitron', sans-serif;
 }
 
-/* Selección de Imágenes */
 .image-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    margin-bottom: 20px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-bottom: 20px;
 }
 
 .code-image {
-    width: 100%;
-    max-width: 150px;
-    height: 150px;
-    cursor: pointer;
-    border: 2px solid #ffffff;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border-radius: 10px;
+  width: 100%;
+  max-width: 150px;
+  height: 150px;
+  cursor: pointer;
+  border: 2px solid #ffffff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 10px;
 }
 
 .code-image:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 15px rgba(0, 255, 204, 0.8);
+}
+
+/* Números y letras */
+.number-grid,
+.letter-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 80px);
+  gap: 20px;
+}
+
+.code-number,
+.code-letter {
+  background-color: #00ffcc;
+  color: #1e272e;
+  font-size: 1.5rem;
+  padding: 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.code-number:hover,
+.code-letter:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 10px rgba(0, 255, 204, 0.8);
+}
+
+/* Resultado de validación */
+#result-message {
+  font-size: 1.8rem;
+  margin-top: 20px;
+  color: #ff6347;
+  text-align: center;
+  animation: flicker 1.5s infinite alternate;
+}
+
+@keyframes flicker {
+  0% { opacity: 1; }
+  100% { opacity: 0.9; }
+}
+
+/* Responsiveness para pantallas pequeñas */
+@media (max-width: 768px) {
+  .image-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .number-grid, .letter-grid {
+    grid-template-columns: repeat(3, 60px);
+  }
+
+  h2 {
+    font-size: 1.4rem;
+  }
+
+  .code-number, .code-letter {
+    padding: 15px;
+    font-size: 1.2rem;
+  }
+}
+
+/* Clase para elementos seleccionados */
+.selected {
+  outline: 3px solid #00ffcc;
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(0, 255, 204, 0.8);
+}
+
+
+/* General */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #1e272e;
+    color: #ffffff;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.chapter4-bg {
+    background-color: #1e272e;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+
+/* Contenedor de botones de opción */
+.buttons-container {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    max-width: 500px;
+}
+
+.option-button img {
+    width: 100px;
+    height: 100px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.option-button:hover img {
     transform: scale(1.1);
     box-shadow: 0 0 15px rgba(0, 255, 204, 0.8);
 }
 
-/* Selección de Números */
-.number-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 80px);
-    gap: 20px;
-    margin-bottom: 20px;
-}
-
-.code-number {
-    background-color: #00ffcc;
-    color: #1e272e;
-    font-size: 1.5rem;
-    padding: 20px;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.code-number:hover {
-    transform: scale(1.1);
-    box-shadow: 0 0 10px rgba(0, 255, 204, 0.8);
-}
-
-/* Selección de Letras */
-.letter-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 80px);
-    gap: 20px;
-}
-
-.code-letter {
-    background-color: #00ffcc;
-    color: #1e272e;
-    font-size: 1.5rem;
-    padding: 20px;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.code-letter:hover {
-    transform: scale(1.1);
-    box-shadow: 0 0 10px rgba(0, 255, 204, 0.8);
-}
-
-/* Mensaje de Resultado */
+/* Mensaje de resultado */
 #result-message {
     font-size: 1.8rem;
-    margin-top: 20px;
-    color: #ff6347;
+    margin-top: 30px;
+    color: #ffffff;
     text-align: center;
+    background-color: rgba(231, 76, 60, 0.8);
+    padding: 10px 20px;
+    border-radius: 10px;
+    max-width: 80%;
+    margin: 20px auto;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
 }
 
-/* Responsiveness para pantallas más pequeñas */
-@media (max-width: 768px) {
-    .image-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
+/* Efecto de humo */
+.full-screen-smoke {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(50, 50, 50, 0.9);
+    z-index: 20;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    animation: closeEyes 10s ease forwards;
+}
 
-    .number-grid, .letter-grid {
-        grid-template-columns: repeat(3, 60px);
-    }
+/* Humo denso con múltiples nubes */
+.smoke-cloud {
+    width: 300px;
+    height: 300px;
+    background-color: rgba(100, 100, 100, 0.5);
+    border-radius: 50%;
+    position: absolute;
+    animation: moveSmoke 5s ease-in-out infinite;
+}
 
-    h2 {
-        font-size: 1.4rem;
+@keyframes moveSmoke {
+    0% {
+        transform: translateX(0) translateY(0) scale(1);
+        opacity: 0.6;
     }
+    50% {
+        transform: translateX(30px) translateY(-50px) scale(1.2);
+        opacity: 0.4;
+    }
+    100% {
+        transform: translateX(-30px) translateY(50px) scale(1);
+        opacity: 0.6;
+    }
+}
 
-    .code-number, .code-letter {
-        padding: 15px;
-        font-size: 1.2rem;
+.smoke-cloud:nth-child(2) {
+    animation-duration: 6s;
+    width: 250px;
+    height: 250px;
+}
+
+.smoke-cloud:nth-child(3) {
+    animation-duration: 4s;
+    width: 280px;
+    height: 280px;
+}
+
+.smoke-cloud:nth-child(4) {
+    animation-duration: 8s;
+    width: 320px;
+    height: 320px;
+}
+
+/* Animación de cerrar ojos */
+@keyframes closeEyes {
+    0% {
+        background-color: rgba(50, 50, 50, 0.9);
+    }
+    50% {
+        background-color: rgba(0, 0, 0, 0.95);
+    }
+    100% {
+        background-color: rgba(0, 0, 0, 1);
     }
 }
 
 
-/* Clase para mostrar un elemento seleccionado */
-.selected {
-    outline: 3px solid #00ffcc;
-    transform: scale(1.05); /* Agranda ligeramente el elemento seleccionado */
-    box-shadow: 0 0 20px rgba(0, 255, 204, 0.8);
+/* Efecto de ciencia en la introducción */
+.science-effect {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+    background: linear-gradient(to bottom, #000000, #1e272e);
 }
 
-/* Otros estilos ya presentes */
+.molecule {
+    position: absolute;
+    border-radius: 50%;
+    background-color: rgba(0, 255, 204, 0.8);
+    box-shadow: 0 0 10px rgba(0, 255, 204, 0.6);
+    animation: floatMolecule 6s ease-in-out infinite;
+}
+
+@keyframes floatMolecule {
+    0% {
+        transform: translate(0, 0);
+        opacity: 0.8;
+    }
+    50% {
+        transform: translate(50px, -50px);
+        opacity: 0.4;
+    }
+    100% {
+        transform: translate(-50px, 50px);
+        opacity: 0.8;
+    }
+}
+/* Efecto de humo a pantalla completa */
+.full-screen-smoke {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(50, 50, 50, 0.9);
+    z-index: 20;
+    display: none;  /* Se muestra cuando hay error */
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* Humo denso con múltiples nubes */
+.smoke-cloud {
+    width: 300px;
+    height: 300px;
+    background-color: rgba(100, 100, 100, 0.5);
+    border-radius: 50%;
+    position: absolute;
+    animation: moveSmoke 5s ease-in-out infinite;
+}
+
+@keyframes moveSmoke {
+    0% {
+        transform: translateX(0) translateY(0) scale(1);
+        opacity: 0.6;
+    }
+    50% {
+        transform: translateX(30px) translateY(-50px) scale(1.2);
+        opacity: 0.4;
+    }
+    100% {
+        transform: translateX(-30px) translateY(50px) scale(1);
+        opacity: 0.6;
+    }
+}
+
+/* Añadir más variación a las nubes */
+.smoke-cloud:nth-child(2) {
+    animation-duration: 6s;
+    width: 250px;
+    height: 250px;
+}
+
+.smoke-cloud:nth-child(3) {
+    animation-duration: 4s;
+    width: 280px;
+    height: 280px;
+}
+
+/* Efecto de ciencia en la introducción */
+.science-effect {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+    background: linear-gradient(to bottom, #000000, #1e272e);
+}
+
+.molecule {
+    position: absolute;
+    border-radius: 50%;
+    background-color: rgba(0, 255, 204, 0.8);
+    box-shadow: 0 0 10px rgba(0, 255, 204, 0.6);
+    animation: floatMolecule 6s ease-in-out infinite;
+}
+
+@keyframes floatMolecule {
+    0% {
+        transform: translate(0, 0);
+        opacity: 0.8;
+    }
+    50% {
+        transform: translate(50px, -50px);
+        opacity: 0.4;
+    }
+    100% {
+        transform: translate(-50px, 50px);
+        opacity: 0.8;
+    }
+}
+
+
+
+
+/* Botón de pistas en la esquina */
+.hint-button-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 100;
+}
+
+.hint-button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.hint-button:hover {
+    background-color: #2980b9;
+}
+
+/* Modal de pistas */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 200;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modal-content {
+    background-color: #000;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 400px;
+    border-radius: 10px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+}
+
+/* Estilo de las pistas */
+#hints-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+#hints-list li {
+    background-color: #000;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: none; /* Ocultar pistas por defecto */
+}
+
+.next-hint-button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.next-hint-button:hover {
+    background-color: #2980b9;
+}
+

@@ -6,18 +6,48 @@
     <title>Chapter 6 - Escape Room</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
-   <div class="timer-container">
-        <span id="time">60:00</span>
-        <button id="pause-button">Pausar</button>
-        <button id="reset-button">Reiniciar</button>
+<body class="chapter6-bg">
+ <!-- Banner fijo con temporizador y botón de pistas -->
+    <div class="banner-container">
+        <!-- Botón de pistas a la izquierda -->
+        <button id="hint-button" class="hint-button">💡 Ver Pistas</button>
+
+        <!-- Temporizador a la derecha con botones en la misma línea -->
+        <div class="timer-container">
+            <span id="time">45:39</span>
+            <div class="timer-buttons">
+                <button id="pause-button" class="icon-button">⏸️</button>
+                <button id="reset-button" class="icon-button">🔄</button>
+            </div>
+        </div>
     </div>
-<div class="container">
-    <h2>Escribe la frase correcta</h2>
-    <textarea id="text-input" placeholder="Escribe aquí..." rows="4"></textarea>
-    <button id="validate-button">Validar</button>
-    <p id="result-message"></p>
+
+    <!-- Modal de Pistas -->
+    <div id="hint-modal" class="modal">
+        <div class="modal-content">
+            <span id="close-hint" class="close">&times;</span>
+            <h2>Pistas</h2>
+            <ul id="hints-list">
+                <!-- Las pistas se agregarán aquí -->
+            </ul>
+            <button id="show-next-hint">Mostrar Siguiente Pista</button>
+        </div>
+    </div>
+
+
+
+
+    <div class="manuscript-container">
+        <h2>Escribe la frase correcta</h2>
+        <textarea id="text-input" class="manuscript" placeholder="Escribe aquí..." rows="4"></textarea>
+        <button id="validate-button">Validar</button>
+        <p id="result-message"></p>
+    </div>
+<!-- Botón de pistas -->
+<div class="hint-button-container">
+    <button id="hint-button" class="hint-button">Pistas</button>
 </div>
+
 
 
 <script src="scripts.js"></script>

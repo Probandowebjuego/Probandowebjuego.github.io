@@ -7,33 +7,52 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body class="chapter5-bg">
-    <!-- Contenedor del temporizador -->
-    <div class="timer-container">
-        <span id="time">60:00</span>
-        <button id="pause-button">Pausar</button>
-        <button id="reset-button">Reiniciar</button>
+ <!-- Banner fijo con temporizador y botón de pistas -->
+    <div class="banner-container">
+        <!-- Botón de pistas a la izquierda -->
+        <button id="hint-button" class="hint-button">💡 Ver Pistas</button>
+
+        <!-- Temporizador a la derecha con botones en la misma línea -->
+        <div class="timer-container">
+            <span id="time">45:39</span>
+            <div class="timer-buttons">
+                <button id="pause-button" class="icon-button">⏸️</button>
+                <button id="reset-button" class="icon-button">🔄</button>
+            </div>
+        </div>
     </div>
 
-
+    <!-- Modal de Pistas -->
+    <div id="hint-modal" class="modal">
+        <div class="modal-content">
+            <span id="close-hint" class="close">&times;</span>
+            <h2>Pistas</h2>
+            <ul id="hints-list">
+                <!-- Las pistas se agregarán aquí -->
+            </ul>
+            <button id="show-next-hint">Mostrar Siguiente Pista</button>
+        </div>
+    </div>
 
 <div class="safe-container">
     <h1>Gira los diales para desbloquear la caja fuerte</h1>
     <div class="dials">
         <div class="dial-wrapper">
             <div class="dial" id="dial1">
-                <img src="images/dial1.jpg" alt="Dial 1" class="dial-image">
+                <img src="images/dial1.png" alt="Dial 1" class="dial-image">
             </div>
             <div class="dial-marker"></div> <!-- Marcador del dial 1 -->
         </div>
         <div class="dial-wrapper">
             <div class="dial" id="dial2">
-               <img src="images/dial2.jpg" alt="Dial 1" class="dial-image">
+                <img src="images/dial2.png" alt="Dial 2" class="dial-image">
             </div>
             <div class="dial-marker"></div> <!-- Marcador del dial 2 -->
         </div>
     </div>
     <div id="result-message"></div>
 </div>
+
 
 
     <script src="scripts.js"></script>

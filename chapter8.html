@@ -7,11 +7,35 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-   <div class="timer-container">
-        <span id="time">60:00</span>
-        <button id="pause-button">Pausar</button>
-        <button id="reset-button">Reiniciar</button>
+ <!-- Banner fijo con temporizador y botón de pistas -->
+    <div class="banner-container">
+        <!-- Botón de pistas a la izquierda -->
+        <button id="hint-button" class="hint-button">💡 Ver Pistas</button>
+
+        <!-- Temporizador a la derecha con botones en la misma línea -->
+        <div class="timer-container">
+            <span id="time">45:39</span>
+            <div class="timer-buttons">
+                <button id="pause-button" class="icon-button">⏸️</button>
+                <button id="reset-button" class="icon-button">🔄</button>
+            </div>
+        </div>
     </div>
+
+    <!-- Modal de Pistas -->
+    <div id="hint-modal" class="modal">
+        <div class="modal-content">
+            <span id="close-hint" class="close">&times;</span>
+            <h2>Pistas</h2>
+            <ul id="hints-list">
+                <!-- Las pistas se agregarán aquí -->
+            </ul>
+            <button id="show-next-hint">Mostrar Siguiente Pista</button>
+        </div>
+    </div>
+
+
+
 <<div class="chapter8-container">
     <div class="monitor-frame">
         <!-- Pantalla Futurista -->
@@ -25,6 +49,7 @@
                     <img src="images/33.png" alt="img3" class="code-image" data-code="img3">
                     <img src="images/44.png" alt="img4" class="code-image" data-code="img4">
                     <img src="images/55.png" alt="img5" class="code-image" data-code="img5">
+                      <img src="images/66.png" alt="img6" class="code-image" data-code="img6">
 
                 </div>
             </div>
@@ -60,6 +85,8 @@
         </div>
     </div>
 </div>
+
+
 
 
 

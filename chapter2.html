@@ -8,16 +8,40 @@
 </head>
 <body class="chapter2-bg">
 
-    <!-- Contenedor del temporizador -->
-    <div class="timer-container">
-        <span id="time">60:00</span>
-        <button id="pause-button">Pausar</button>
-        <button id="reset-button">Reiniciar</button>
+ <!-- Banner fijo con temporizador y botón de pistas -->
+    <div class="banner-container">
+        <!-- Botón de pistas a la izquierda -->
+        <button id="hint-button" class="hint-button">💡 Ver Pistas</button>
+
+        <!-- Temporizador a la derecha con botones en la misma línea -->
+        <div class="timer-container">
+            <span id="time">45:39</span>
+            <div class="timer-buttons">
+                <button id="pause-button" class="icon-button">⏸️</button>
+                <button id="reset-button" class="icon-button">🔄</button>
+            </div>
+        </div>
     </div>
+
+    <!-- Modal de Pistas -->
+    <div id="hint-modal" class="modal">
+        <div class="modal-content">
+            <span id="close-hint" class="close">&times;</span>
+            <h2>Pistas</h2>
+            <ul id="hints-list">
+                <!-- Las pistas se agregarán aquí -->
+            </ul>
+            <button id="show-next-hint">Mostrar Siguiente Pista</button>
+        </div>
+    </div>
+
+
 
     <!-- Contenedor de la luz tenue -->
     <div class="light-dim">
-        <h1>Restablece la energía del laboratorio</h1>
+<div id="result-message"></div>
+        </div>
+    </div>
 
         <!-- Panel de control de interruptores -->
         <div class="panel-container">
@@ -29,9 +53,8 @@
             </div>
 
             <!-- Indicador de código (se muestra cuando se acierta) -->
-<div id="result-message"></div>
-        </div>
-    </div>
+
+
 
     <script src="scripts.js"></script>
 </body>

@@ -1,38 +1,39 @@
-// --- Temporizador ---
 document.addEventListener('DOMContentLoaded', () => {
-    let time = parseInt(localStorage.getItem('escapeTimer')) || 3600;
+    // --- Inicialización del temporizador ---
+    let time = parseInt(localStorage.getItem('escapeTimer')) || 3600; // 60 minutos en segundos
     let interval;
     let isPaused = false;
 
-    function startTimer() {
-        interval = setInterval(() => {
-            if (!isPaused) {
-                const minutes = Math.floor(time / 60);
-                const seconds = time % 60;
-                const timeElement = document.getElementById('time');
-                if (timeElement) {
-                    timeElement.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-                }
-                time--;
-                localStorage.setItem('escapeTimer', time);
+    // --- Actualización del temporizador ---
+    function updateTimer() {
+        const minutes = Math.floor(time / 60);
+        const seconds = time % 60;
+        const timeElement = document.getElementById('time');
+        if (timeElement) {
+            timeElement.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+        }
 
-                if (time <= 0) {
-                    clearInterval(interval);
-                    const resultMessage = document.getElementById('result-message');
-                    if (resultMessage) {
-                        resultMessage.textContent = "¡El tiempo ha terminado!";
-                    }
-                    document.body.classList.add('game-over');
-                }
+        if (!isPaused && time > 0) {
+            time--;
+            localStorage.setItem('escapeTimer', time);
+        }
+
+        if (time <= 0) {
+            clearInterval(interval);
+            const resultMessage = document.getElementById('result-message');
+            if (resultMessage) {
+                resultMessage.textContent = "¡El tiempo ha terminado!";
             }
-        }, 1000);
+            document.body.classList.add('game-over');
+        }
     }
 
-    const timeElement = document.getElementById('time');
-    if (timeElement) {
-        startTimer();
+    // --- Inicio del temporizador ---
+    function startTimer() {
+        interval = setInterval(updateTimer, 1000);
     }
 
+    // --- Botón de pausa ---
     const pauseButton = document.getElementById('pause-button');
     if (pauseButton) {
         pauseButton.addEventListener('click', () => {
@@ -41,11 +42,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // --- Botón de reinicio ---
     const resetButton = document.getElementById('reset-button');
     if (resetButton) {
         resetButton.addEventListener('click', () => {
             clearInterval(interval);
-            time = 3600;
+            time = 3600; // Reinicia a 60 minutos
             localStorage.removeItem('escapeTimer');
             startTimer();
             const resultMessage = document.getElementById('result-message');
@@ -54,7 +56,11 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
-document.addEventListener('DOMContentLoaded', () => {
+
+    // Iniciar temporizador al cargar
+    startTimer();
+
+    // --- Efecto de partículas flotantes en la introducción ---
     const particles = 30; // Número de partículas
     const container = document.querySelector('body');
 
@@ -69,188 +75,241 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-    // --- Botón "Comenzar la Aventura" ---
-    const startButton = document.getElementById('start-button');
-    if (startButton) {
-        startButton.addEventListener('click', function () {
-            window.location.href = 'chapter1.html';
-        });
-    }
 
-    // --- Chapter 1: Funcionalidad de selección de botellas ---
-    const bottles = document.querySelectorAll('.bottle');
-    let selectedColors = [];
-    const maxSelection = 3;
-
-    bottles.forEach(bottle => {
-        bottle.addEventListener('click', () => {
-            const color = bottle.dataset.color;
-
-            if (selectedColors.includes(color)) {
-                selectedColors = selectedColors.filter(c => c !== color);
-                bottle.classList.remove('selected');
-            } else if (selectedColors.length < maxSelection) {
-                selectedColors.push(color);
-                bottle.classList.add('selected');
-            } else {
-                const firstSelectedColor = selectedColors.shift();
-                document.querySelector(`[data-color="${firstSelectedColor}"]`).classList.remove('selected');
-                selectedColors.push(color);
-                bottle.classList.add('selected');
-            }
-        });
+// --- Botón "Comenzar la Aventura" ---
+const startButton = document.getElementById('start-button');
+if (startButton) {
+    startButton.addEventListener('click', function () {
+        window.location.href = 'chapter1.html';
     });
-
-    const validateButton1 = document.getElementById('validate-button');
-    if (validateButton1) {
-        validateButton1.addEventListener('click', () => {
-            const resultMessage = document.getElementById('result-message');
-            if (selectedColors.length !== maxSelection) {
-                resultMessage.textContent = "¡Debes seleccionar 3 pociones!";
-            } else {
-                const correctCombination = ['naranja', 'verde', 'amarillo'];
-                if (selectedColors.sort().toString() === correctCombination.sort().toString()) {
-                    resultMessage.textContent = "¡Correcto!";
-                    setTimeout(() => {
-                        window.location.href = 'chapter2.html';
-                    }, 1500);
-                } else {
-                    resultMessage.textContent = "Combinación incorrecta. Intenta de nuevo.";
-                    selectedColors = [];
-                    bottles.forEach(bottle => bottle.classList.remove('selected'));
-                }
-            }
-        });
-    }
-
-    // --- Chapter 2: Interruptores ---
-    const switches = document.querySelectorAll('.switch');
-    const correctOrder = [0, 2, 3, 1];
-    let switchOrder = [];
-
-    switches.forEach((switchElement, index) => {
-        switchElement.addEventListener('click', function () {
-            if (!switchElement.classList.contains('up')) {
-                switchElement.classList.add('up');
-                switchOrder.push(index);
-
-                if (switchOrder.length === correctOrder.length) {
-                    validateSwitchOrder();
-                }
-            }
-        });
-    });
-
-    function validateSwitchOrder() {
-        const resultMessage = document.getElementById('result-message');
-        if (switchOrder.every((val, index) => val === correctOrder[index])) {
-            document.body.classList.add('light-on');
-            resultMessage.textContent = "¡Correcto!";
-            setTimeout(() => {
-                window.location.href = 'chapter3.html';
-            }, 2000);
-        } else {
-            shakeScreen();
-            resetSwitches();
-            resultMessage.textContent = "Orden incorrecto. Intenta de nuevo.";
-        }
-    }
-
-    function shakeScreen() {
-        document.body.classList.add('shake');
-        setTimeout(() => {
-            document.body.classList.remove('shake');
-        }, 500);
-    }
-
-    function resetSwitches() {
-        switches.forEach(switchElement => switchElement.classList.remove('up'));
-        switchOrder = [];
-    }
-
-    // --- Chapter 3: Código de letras ---
-    let enteredCode = [];
-    const correctCode = ['C', 'U', 'R', 'E'];
-
-    function updateDisplay() {
-        const display = document.getElementById('code-display');
-        if (display) {
-            display.textContent = enteredCode.join('') || '****';
-        }
-    }
-
-    const keys = document.querySelectorAll('.key');
-    keys.forEach(key => {
-        key.addEventListener('click', () => {
-            const letter = key.dataset.letter;
-            if (enteredCode.length < 4) {
-                enteredCode.push(letter);
-                updateDisplay();
-            }
-        });
-    });
-
-    const validateButton2 = document.getElementById('validate-button');
-    if (validateButton2) {
-        validateButton2.addEventListener('click', () => {
-            const resultMessage = document.getElementById('result-message');
-            if (enteredCode.join('') === correctCode.join('')) {
-                resultMessage.textContent = "¡Correcto!";
-                setTimeout(() => {
-                    window.location.href = 'chapter4.html';
-                }, 2000);
-            } else {
-                resultMessage.textContent = "ERROR. Intenta de nuevo.";
-                enteredCode = [];
-                updateDisplay();
-            }
-        });
-    }
-
- // --- Chapter 4: Botones de imágenes ---
-
-const optionButtons = document.querySelectorAll('.option-button');
-
-// Función para mostrar el efecto de humo realista en toda la pantalla
-function showFullScreenSmoke() {
-    const smokeScreen = document.createElement('div');
-    smokeScreen.classList.add('full-screen-smoke');
-
-    // Crear más nubes de humo para un efecto más denso
-    for (let i = 0; i < 5; i++) {
-        const smokeCloud = document.createElement('div');
-        smokeCloud.classList.add('smoke-cloud');
-        smokeScreen.appendChild(smokeCloud);
-    }
-
-    document.body.appendChild(smokeScreen);
-
-    // Mantener el humo visible durante 5 segundos y luego eliminarlo
-    setTimeout(() => {
-        document.body.removeChild(smokeScreen);
-    }, 5000); // Mantener el humo visible durante 5 segundos
 }
 
-// Función para manejar el clic en los botones de opciones
-optionButtons.forEach(button => {
-    button.addEventListener('click', function() {
-        const isCorrect = this.dataset.correct === "true";
+// --- Chapter 1: Funcionalidad de selección de botellas ---
+const bottles = document.querySelectorAll('.bottle');
+let selectedColors = [];
+const maxSelection = 3;
 
-        if (isCorrect) {
-            document.getElementById('result-message').textContent = "¡Correcto!";
-            document.getElementById('result-message').style.color = '#27ae60'; // Mensaje verde
+bottles.forEach(bottle => {
+    bottle.addEventListener('click', () => {
+        const color = bottle.dataset.color;
+
+        // Si ya está seleccionada, deselecciona
+        if (selectedColors.includes(color)) {
+            selectedColors = selectedColors.filter(c => c !== color);
+            bottle.classList.remove('selected');
+        } else if (selectedColors.length < maxSelection) {
+            // Añade el color seleccionado
+            selectedColors.push(color);
+            bottle.classList.add('selected');
+        } else {
+            // Cambia el primer color seleccionado por uno nuevo
+            const firstSelectedColor = selectedColors.shift();
+            document.querySelector(`[data-color="${firstSelectedColor}"]`).classList.remove('selected');
+            selectedColors.push(color);
+            bottle.classList.add('selected');
+        }
+    });
+});
+
+const validateButton = document.getElementById('validate-button');
+if (validateButton) {
+    validateButton.addEventListener('click', () => {
+        const resultMessage = document.getElementById('result-message');
+        if (selectedColors.length !== maxSelection) {
+            resultMessage.textContent = "¡Debes seleccionar 3 pociones!";
+        } else {
+            const correctCombination = ['naranja', 'verde', 'amarillo'];
+
+            if (selectedColors.sort().toString() === correctCombination.sort().toString()) {
+                resultMessage.textContent = "¡Correcto!";
+                setTimeout(() => {
+                    window.location.href = 'chapter2.html';
+                }, 1500);
+            } else {
+                resultMessage.textContent = "Combinación incorrecta. ¡Explosión!";
+
+                // Añadir la animación de explosión a las botellas seleccionadas
+                selectedColors.forEach(color => {
+                    const bottleElement = document.querySelector(`[data-color="${color}"]`);
+                    bottleElement.classList.add('error');
+
+                    // Quitar la clase de error después de la animación
+                    setTimeout(() => {
+                        bottleElement.classList.remove('error', 'selected');
+                    }, 1000);
+                });
+
+                // Limpiar selección
+                selectedColors = [];
+            }
+        }
+    });
+}
+// --- Chapter 2: Interruptores ---
+const switches = document.querySelectorAll('.switch');
+const correctOrder = [0, 2, 3, 1];
+let switchOrder = [];
+
+switches.forEach((switchElement, index) => {
+    switchElement.addEventListener('click', function () {
+        if (!switchElement.classList.contains('up')) {
+            switchElement.classList.add('up');
+            switchOrder.push(index);
+
+            if (switchOrder.length === correctOrder.length) {
+                validateSwitchOrder();
+            }
+        }
+    });
+});
+
+function validateSwitchOrder() {
+    const resultMessage = document.getElementById('result-message');
+    if (switchOrder.every((val, index) => val === correctOrder[index])) {
+        document.body.classList.add('light-on');
+        resultMessage.textContent = "¡Correcto!";
+        setTimeout(() => {
+            window.location.href = 'chapter3.html';
+        }, 2000);
+    } else {
+        shakeScreen();
+        resetSwitches();
+        resultMessage.textContent = "Orden incorrecto. Intenta de nuevo.";
+    }
+}
+
+function shakeScreen() {
+    document.body.classList.add('shake');
+    setTimeout(() => {
+        document.body.classList.remove('shake');
+    }, 500);
+}
+
+function resetSwitches() {
+    switches.forEach(switchElement => switchElement.classList.remove('up'));
+    switchOrder = [];
+}
+
+
+// --- Chapter 3: Código de letras ---
+let enteredCode = [];
+const correctCode = ['C', 'U', 'R', 'E'];
+
+function updateDisplay() {
+    const display = document.getElementById('code-display');
+    if (display) {
+        display.textContent = enteredCode.join('') || '****';
+    }
+}
+
+const keys = document.querySelectorAll('.key');
+keys.forEach(key => {
+    key.addEventListener('click', () => {
+        const letter = key.dataset.letter;
+        if (enteredCode.length < 4) {
+            enteredCode.push(letter);
+            updateDisplay();
+        }
+    });
+});
+
+const validateButton2 = document.getElementById('validate-button');
+if (validateButton2) {
+    validateButton2.addEventListener('click', () => {
+        const resultMessage = document.getElementById('result-message');
+        if (enteredCode.join('') === correctCode.join('')) {
+            resultMessage.textContent = "¡Correcto!";
             setTimeout(() => {
-                window.location.href = 'chapter5.html'; // Redirigir al siguiente capítulo
+                window.location.href = 'chapter4.html';
             }, 2000);
         } else {
-            document.getElementById('result-message').textContent = "¡Incorrecto! Se han descontado 10 minutos.";
-            document.getElementById('result-message').style.color = '#e74c3c'; // Mensaje rojo
-            showFullScreenSmoke(); // Mostrar humo cubriendo la pantalla
-
-            // Descontar 10 minutos del temporizador
-            time -= 600;
-            localStorage.setItem('escapeTimer', time); // Guardar el nuevo tiempo en localStorage
+            resultMessage.textContent = "ERROR. Intenta de nuevo.";
+            enteredCode = [];
+            updateDisplay();
         }
+    });
+}
+// --- Chapter 4: Manejo de botones de opciones ---
+document.addEventListener('DOMContentLoaded', () => {
+    // --- Inicialización del temporizador ---
+    let time = parseInt(localStorage.getItem('escapeTimer')) || 3600; // 60 minutos en segundos
+    let interval;
+    let isPaused = false;
+
+    // --- Actualización del temporizador ---
+    function updateTimer() {
+        const minutes = Math.floor(time / 60);
+        const seconds = time % 60;
+        const timeElement = document.getElementById('time');
+        if (timeElement) {
+            timeElement.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+        }
+
+        if (!isPaused && time > 0) {
+            time--;
+            localStorage.setItem('escapeTimer', time);
+        }
+
+        if (time <= 0) {
+            clearInterval(interval);
+            const resultMessage = document.getElementById('result-message');
+            if (resultMessage) {
+                resultMessage.textContent = "¡El tiempo ha terminado!";
+            }
+            document.body.classList.add('game-over');
+        }
+    }
+
+    // --- Inicio del temporizador ---
+    function startTimer() {
+        interval = setInterval(updateTimer, 1000);
+    }
+
+    // Iniciar temporizador al cargar
+    startTimer();
+
+    // --- Función para mostrar el efecto de humo ---
+    const smokeEffect = document.getElementById('smoke-effect');
+
+    function showFullScreenSmoke() {
+        smokeEffect.style.display = 'flex';  // Muestra el efecto de humo
+
+        // Bloquear el scroll para evitar que la pantalla se mueva
+        document.body.style.overflow = 'hidden';
+
+        setTimeout(() => {
+            smokeEffect.style.display = 'none';  // Oculta el efecto de humo
+            document.body.style.overflow = '';  // Restaurar el scroll
+        }, 10000);  // La animación dura 10 segundos
+    }
+
+    // --- Función para manejar las opciones de selección ---
+    const optionButtons = document.querySelectorAll('.option-button');
+    const resultMessage = document.getElementById('result-message');
+
+    optionButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const isCorrect = button.dataset.correct === 'true';
+
+            if (isCorrect) {
+                resultMessage.textContent = "¡Correcto! Avanzando...";
+                resultMessage.style.backgroundColor = 'rgba(39, 174, 96, 0.8)';
+                setTimeout(() => {
+                    // Redirigir al capítulo 5
+                    window.location.href = 'chapter5.html';
+                }, 2000);
+            } else {
+                resultMessage.textContent = "¡Error! Restando 10 minutos...";
+                resultMessage.style.backgroundColor = 'rgba(231, 76, 60, 0.8)';
+
+                // Restar 10 minutos (600 segundos) al cronómetro
+                time = Math.max(0, time - 600);
+                localStorage.setItem('escapeTimer', time);
+
+                // Mostrar el efecto de humo
+                showFullScreenSmoke();
+            }
+        });
     });
 });
 
@@ -263,16 +322,16 @@ optionButtons.forEach(button => {
     let dial2Value = 0;
 
     function rotateDial1(value) {
-        dial1Value = value;
-        dial1.style.transform = `rotate(${value * 18}deg)`;
-        checkCombination();
-    }
+    dial1Value = value;
+    dial1.style.transform = `rotate(${value * -18}deg)`; // Valor negativo para sentido antihorario
+    checkCombination();
+}
 
-    function rotateDial2(value) {
-        dial2Value = value;
-        dial2.style.transform = `rotate(${value * 18}deg)`;
-        checkCombination();
-    }
+function rotateDial2(value) {
+    dial2Value = value;
+    dial2.style.transform = `rotate(${value * -18}deg)`; // Valor negativo para sentido antihorario
+    checkCombination();
+}
 
     dial1?.addEventListener('click', () => {
         dial1Value = (dial1Value + 1) % 20;
@@ -283,7 +342,8 @@ optionButtons.forEach(button => {
         dial2Value = (dial2Value + 1) % 20;
         rotateDial2(dial2Value);
     });
-function checkCombination() {
+
+    function checkCombination() {
         const resultMessage = document.getElementById('result-message');
         if (dial1Value === correctDial1 && dial2Value === correctDial2) {
             resultMessage.textContent = "¡Correcto!";
@@ -327,126 +387,89 @@ function checkCombination() {
             }
         });
     }
-});
 
+    // --- Chapter 7: Código Numérico ---
+    document.addEventListener('DOMContentLoaded', () => {
+      const correctCode = ['R', 'A', 'P', 'O']; // Código correcto
+      let enteredCode = [];
+      let initialPositions = {}; // Almacena posiciones iniciales de las teclas
 
-document.addEventListener('DOMContentLoaded', () => {
-  const correctCode = ['R', 'A', 'P', 'O']; // Código correcto
-  let enteredCode = [];
-  let initialPositions = {}; // Almacena posiciones iniciales de las teclas
+      // Seleccionamos todas las teclas
+      const keys = document.querySelectorAll('.key');
+      const slots = document.querySelectorAll('.slot');
+      const resultMessage = document.getElementById('result-message');
 
-  // Seleccionamos todas las teclas
-  const keys = document.querySelectorAll('.key');
-  const slots = document.querySelectorAll('.slot');
-  const resultMessage = document.getElementById('result-message');
+      // Guardamos las posiciones iniciales de las teclas
+      keys.forEach(key => {
+        const rect = key.getBoundingClientRect();
+        initialPositions[key.textContent] = { top: rect.top, left: rect.left };
+      });
 
-  // Guardamos las posiciones iniciales de las teclas
-  keys.forEach(key => {
-    const rect = key.getBoundingClientRect();
-    initialPositions[key.textContent] = { top: rect.top, left: rect.left };
-  });
+      // Manejamos el evento de click de las teclas
+      keys.forEach((key, index) => {
+        key.addEventListener('click', () => {
+          if (enteredCode.length < 4) {
+            // Movemos la tecla a la siguiente ranura disponible
+            key.classList.add('moving');
+            const slotRect = slots[enteredCode.length].getBoundingClientRect();
+            const keyRect = key.getBoundingClientRect();
 
-  // Manejamos el evento de click de las teclas
-  keys.forEach((key, index) => {
-    key.addEventListener('click', () => {
-      if (enteredCode.length < 4) {
-        // Movemos la tecla a la siguiente ranura disponible
-        key.classList.add('moving');
-        const slotRect = slots[enteredCode.length].getBoundingClientRect();
-        const keyRect = key.getBoundingClientRect();
+            // Calculamos la diferencia de posición para mover la tecla
+            const translateX = slotRect.left - keyRect.left;
+            const translateY = slotRect.top - keyRect.top;
 
-        // Calculamos la diferencia de posición para mover la tecla
-        const translateX = slotRect.left - keyRect.left;
-        const translateY = slotRect.top - keyRect.top;
+            key.style.transform = `translate(${translateX}px, ${translateY}px)`;
+            enteredCode.push(key.textContent);
 
-        key.style.transform = `translate(${translateX}px, ${translateY}px)`;
-        enteredCode.push(key.textContent);
+            // Verificamos si ya se han ingresado 4 teclas
+            if (enteredCode.length === 4) {
+              checkCode();
+            }
+          }
+        });
+      });
 
-        // Verificamos si ya se han ingresado 4 teclas
-        if (enteredCode.length === 4) {
-          checkCode();
+      // Función para verificar si el código ingresado es correcto
+      function checkCode() {
+        if (JSON.stringify(enteredCode) === JSON.stringify(correctCode)) {
+          resultMessage.textContent = '¡Código correcto!';
+          resultMessage.style.color = 'green';
+          setTimeout(() => {
+            window.location.href = 'chapter8.html'; // Redirige al siguiente capítulo
+          }, 2000);
+        } else {
+          resultMessage.textContent = 'Código incorrecto. Intenta de nuevo.';
+          resultMessage.style.color = 'red';
+          resetKeys();
         }
       }
+
+      // Función para resetear las teclas a sus posiciones originales
+      function resetKeys() {
+        setTimeout(() => {
+          keys.forEach(key => {
+            key.style.transform = ''; // Reseteamos la posición
+            key.classList.remove('moving');
+          });
+          enteredCode = [];
+          resultMessage.textContent = ''; // Limpiamos el mensaje
+        }, 1000);
+      }
     });
-  });
-
-  // Función para verificar si el código ingresado es correcto
-  function checkCode() {
-    if (JSON.stringify(enteredCode) === JSON.stringify(correctCode)) {
-      resultMessage.textContent = '¡Código correcto!';
-      resultMessage.style.color = 'green';
-      setTimeout(() => {
-        window.location.href = 'chapter8.html'; // Redirige al siguiente capítulo
-      }, 2000);
-    } else {
-      resultMessage.textContent = 'Código incorrecto. Intenta de nuevo.';
-      resultMessage.style.color = 'red';
-      resetKeys();
-    }
-  }
-
-  // Función para resetear las teclas a sus posiciones originales
-  function resetKeys() {
-    setTimeout(() => {
-      keys.forEach(key => {
-        key.style.transform = ''; // Reseteamos la posición
-        key.classList.remove('moving');
-      });
-      enteredCode = [];
-      resultMessage.textContent = ''; // Limpiamos el mensaje
-    }, 1000);
-  }
-});
 
 
-
-
-
-
-
-
-
-
+    // --- Chapter 8: Selección de Imagen, Número y Letra ---
 document.addEventListener('DOMContentLoaded', () => {
     let selectedImage = '';
     let selectedNumber = '';
     let selectedLetter = '';
 
+    // Definir la combinación correcta
     const correctImage = 'img3';  // Imagen correcta
     const correctNumber = '4';    // Número correcto
     const correctLetter = 'A';    // Letra correcta
 
     const resultMessage = document.getElementById('result-message');
-
-    // Selección de Imagen
-    document.querySelectorAll('.code-image').forEach(image => {
-        image.addEventListener('click', () => {
-            selectedImage = image.dataset.code;
-            document.querySelectorAll('.code-image').forEach(img => img.classList.remove('selected'));
-            image.classList.add('selected');
-            checkCode();
-        });
-    });
-
-    // Selección de Número
-    document.querySelectorAll('.code-number').forEach(number => {
-        number.addEventListener('click', () => {
-            selectedNumber = number.dataset.code;
-            document.querySelectorAll('.code-number').forEach(num => num.classList.remove('selected'));
-            number.classList.add('selected');
-            checkCode();
-        });
-    });
-
-    // Selección de Letra
-    document.querySelectorAll('.code-letter').forEach(letter => {
-        letter.addEventListener('click', () => {
-            selectedLetter = letter.dataset.code;
-            document.querySelectorAll('.code-letter').forEach(let => let.classList.remove('selected'));
-            letter.classList.add('selected');
-            checkCode();
-        });
-    });
 
     // Función para comprobar el código
     function checkCode() {
@@ -471,9 +494,168 @@ document.addEventListener('DOMContentLoaded', () => {
         selectedNumber = '';
         selectedLetter = '';
 
-        // Quitar selección visual
+        // Quitar la selección visual
         document.querySelectorAll('.code-image').forEach(img => img.classList.remove('selected'));
         document.querySelectorAll('.code-number').forEach(num => num.classList.remove('selected'));
         document.querySelectorAll('.code-letter').forEach(let => let.classList.remove('selected'));
     }
+
+    // Manejar la selección de imágenes
+    document.querySelectorAll('.code-image').forEach(image => {
+        image.addEventListener('click', () => {
+            selectedImage = image.dataset.code;
+            document.querySelectorAll('.code-image').forEach(img => img.classList.remove('selected'));
+            image.classList.add('selected');
+            checkCode();
+        });
+    });
+
+    // Manejar la selección de números
+    document.querySelectorAll('.code-number').forEach(number => {
+        number.addEventListener('click', () => {
+            selectedNumber = number.dataset.code;
+            document.querySelectorAll('.code-number').forEach(num => num.classList.remove('selected'));
+            number.classList.add('selected');
+            checkCode();
+        });
+    });
+
+    // Manejar la selección de letras
+    document.querySelectorAll('.code-letter').forEach(letter => {
+        letter.addEventListener('click', () => {
+            selectedLetter = letter.dataset.code;
+            document.querySelectorAll('.code-letter').forEach(let => let.classList.remove('selected'));
+            letter.classList.add('selected');
+            checkCode();
+        });
+    });
+});
+
+
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const hintButton = document.getElementById('hint-button');
+    const hintModal = document.getElementById('hint-modal');
+    const closeHint = document.getElementById('close-hint');
+    const hintsList = document.getElementById('hints-list');
+    const showNextHintButton = document.getElementById('show-next-hint');
+    let currentHintIndex = 0;
+
+    // Pistas para cada capítulo
+    const hintsByChapter = {
+        chapter1: [
+            'Pista 1: Observa bien los colores.',
+            'Pista 2: La combinación correcta tiene colores cálidos.',
+            'Pista 3: Experimenta con las pociones naranjas y verdes.'
+        ],
+        chapter2: [
+            'Pista 1: Mira el patrón de los interruptores.',
+            'Pista 2: Solo algunos deben estar arriba.',
+            'Pista 3: Intenta un orden que mezcle los colores primarios.'
+        ],
+        chapter3: [
+            'Pista 1: El código está relacionado con la palabra CURA.',
+            'Pista 2: Revisa las letras que has utilizado.',
+            'Pista 3: A veces es mejor ir despacio.'
+        ],
+        chapter4: [
+            'Pista 1: Recuerda que una opción está en el medio.',
+            'Pista 2: Una de las imágenes te guiará a la solución.',
+            'Pista 3: No tengas miedo de equivocarte y aprender.'
+        ],
+        chapter5: [
+            'Pista 1: Los diales tienen un patrón.',
+            'Pista 2: No es necesario girar los diales rápidamente.',
+            'Pista 3: Mantén la calma, los números te guiarán.'
+        ],
+        chapter6: [
+            'Pista 1: La frase correcta proviene de una famosa cita.',
+            'Pista 2: Piensa en los antiguos científicos.',
+            'Pista 3: Revisa las palabras clave, te ayudarán.'
+        ],
+        chapter7: [
+            'Pista 1: El orden de los números es clave.',
+            'Pista 2: Cada tecla corresponde a una ranura.',
+            'Pista 3: Piensa en la alineación correcta de los números.'
+        ],
+        chapter8: [
+            'Pista 1: Observa detenidamente los símbolos.',
+            'Pista 2: La secuencia tiene un patrón que se repite.',
+            'Pista 3: Cada símbolo corresponde a una acción específica.'
+        ]
+    };
+
+    // Determinar el capítulo actual basado en la URL o algún identificador en la página
+    let currentChapter = 'chapter1'; // Cambia dinámicamente según el capítulo
+    if (window.location.href.includes('chapter2')) {
+        currentChapter = 'chapter2';
+    } else if (window.location.href.includes('chapter3')) {
+        currentChapter = 'chapter3';
+    } else if (window.location.href.includes('chapter4')) {
+        currentChapter = 'chapter4';
+    } else if (window.location.href.includes('chapter5')) {
+        currentChapter = 'chapter5';
+    } else if (window.location.href.includes('chapter6')) {
+        currentChapter = 'chapter6';
+    } else if (window.location.href.includes('chapter7')) {
+        currentChapter = 'chapter7';
+    } else if (window.location.href.includes('chapter8')) {
+        currentChapter = 'chapter8';
+    }
+
+    // Abrir el modal al hacer clic en el botón de pistas
+    hintButton.addEventListener('click', () => {
+        // Limpiar el contenido actual del modal
+        hintsList.innerHTML = '';
+
+        // Añadir las pistas del capítulo actual como elementos de lista ocultos
+        if (hintsByChapter[currentChapter]) {
+            hintsByChapter[currentChapter].forEach(hint => {
+                const listItem = document.createElement('li');
+                listItem.textContent = hint;
+                listItem.style.display = 'none'; // Ocultar las pistas al inicio
+                hintsList.appendChild(listItem);
+            });
+        }
+
+        // Resetear el índice y el botón de mostrar pistas
+        currentHintIndex = 0;
+        revealNextHint(); // Revela la primera pista
+        showNextHintButton.style.display = 'block'; // Asegura que el botón de pistas esté visible
+
+        hintModal.style.display = 'block'; // Mostrar el modal de pistas
+    });
+
+    // Función para revelar la siguiente pista
+    function revealNextHint() {
+        const hintItems = hintsList.querySelectorAll('li');
+        if (currentHintIndex < hintItems.length) {
+            hintItems[currentHintIndex].style.display = 'block'; // Muestra la pista actual
+            currentHintIndex++;
+        }
+
+        // Si ya se han mostrado todas las pistas, ocultar el botón
+        if (currentHintIndex === hintItems.length) {
+            showNextHintButton.style.display = 'none';
+        }
+    }
+
+    // Mostrar la siguiente pista al hacer clic en el botón "Mostrar Pista"
+    showNextHintButton.addEventListener('click', () => {
+        revealNextHint();
+    });
+
+    // Cerrar el modal al hacer clic en la "X"
+    closeHint.addEventListener('click', () => {
+        hintModal.style.display = 'none';
+    });
+
+    // Cerrar el modal si se hace clic fuera del contenido
+    window.addEventListener('click', (event) => {
+        if (event.target === hintModal) {
+            hintModal.style.display = 'none';
+        }
+    });
 });

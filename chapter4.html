@@ -3,29 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chapter 3 - Código de 4 Letras</title>
+    <title>Chapter 4 - Selección de Imágenes</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body class="chapter4-bg">
-  <!-- Contenedor del temporizador -->
-    <div class="timer-container">
-        <span id="time">60:00</span>
-        <button id="pause-button">Pausar</button>
-        <button id="reset-button">Reiniciar</button>
-    </div>
-<div class="buttons-container">
-    <div class="option-button" id="button-left" data-correct="false">
-        <img src="images/icono1.png" alt="Imagen 1">
-    </div>
-    <div class="option-button" id="button-middle" data-correct="true">
-        <img src="images/icono2.png" alt="Boron">
-    </div>
-    <div class="option-button" id="button-right" data-correct="false">
-        <img src="images/icono3.png" alt="Imagen 2">
-    </div>
-</div>
+ <!-- Banner fijo con temporizador y botón de pistas -->
+    <div class="banner-container">
+        <!-- Botón de pistas a la izquierda -->
+        <button id="hint-button" class="hint-button">💡 Ver Pistas</button>
 
-<div id="result-message"></div>
+        <!-- Temporizador a la derecha con botones en la misma línea -->
+        <div class="timer-container">
+            <span id="time">45:39</span>
+            <div class="timer-buttons">
+                <button id="pause-button" class="icon-button">⏸️</button>
+                <button id="reset-button" class="icon-button">🔄</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Pistas -->
+    <div id="hint-modal" class="modal">
+        <div class="modal-content">
+            <span id="close-hint" class="close">&times;</span>
+            <h2>Pistas</h2>
+            <ul id="hints-list">
+                <!-- Las pistas se agregarán aquí -->
+            </ul>
+            <button id="show-next-hint">Mostrar Siguiente Pista</button>
+        </div>
+    </div>
+
+
+
+
+
+    <div class="buttons-container">
+        <div class="option-button" id="button-left" data-correct="false">
+            <img src="images/icono1.png" alt="Imagen 1">
+        </div>
+        <div class="option-button" id="button-middle" data-correct="true">
+            <img src="images/icono2.png" alt="Boron">
+        </div>
+        <div class="option-button" id="button-right" data-correct="false">
+            <img src="images/icono3.png" alt="Imagen 2">
+        </div>
+    </div>
+
+    <div id="result-message"></div>
+
+    <!-- Efecto de humo -->
+    <div class="full-screen-smoke" id="smoke-effect">
+        <div class="smoke-cloud"></div>
+        <div class="smoke-cloud"></div>
+        <div class="smoke-cloud"></div>
+        <div class="smoke-cloud"></div>
+    </div>
 
 
     <script src="scripts.js"></script>
