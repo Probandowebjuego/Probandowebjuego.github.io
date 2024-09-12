@@ -390,7 +390,7 @@ function rotateDial2(value) {
 
     // --- Chapter 7: Código Numérico ---
     document.addEventListener('DOMContentLoaded', () => {
-      const correctCode = ['R', 'A', 'P', 'O']; // Código correcto
+      const correctCode = ['A', 'C', 'I', 'D']; // Código correcto
       let enteredCode = [];
       let initialPositions = {}; // Almacena posiciones iniciales de las teclas
 
