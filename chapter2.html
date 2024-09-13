@@ -3,12 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel de Control - Capítulo 2</title>
+    <title>Escape Room - Capítulo 1</title>
+    <!-- Enlace al archivo de CSS -->
     <link rel="stylesheet" href="styles.css">
 </head>
-<body class="chapter2-bg">
+<body class="chapter1-bg"> <!-- Aplicamos una clase específica para este capítulo -->
 
- <!-- Banner fijo con temporizador y botón de pistas -->
+    <!-- Sección del primer juego: Selección de pociones -->
+    <section id="chapter1">
+
+  <!-- Banner fijo con temporizador y botón de pistas -->
     <div class="banner-container">
         <!-- Botón de pistas a la izquierda -->
         <button id="hint-button" class="hint-button">💡 Ver Pistas</button>
@@ -37,25 +41,25 @@
 
 
 
-    <!-- Contenedor de la luz tenue -->
-    <div class="light-dim">
-<div id="result-message"></div>
+        <div class="bottles-container">
+            <div class="bottle" id="bottle-rosa" data-color="rosa"></div>
+            <div class="bottle" id="bottle-naranja" data-color="naranja"></div>
+            <div class="bottle" id="bottle-rojo" data-color="rojo"></div>
+            <div class="bottle" id="bottle-amarillo" data-color="amarillo"></div>
+            <div class="bottle" id="bottle-azul" data-color="azul"></div>
+            <div class="bottle" id="bottle-verde" data-color="verde"></div>
         </div>
-    </div>
-
-        <!-- Panel de control de interruptores -->
-        <div class="panel-container">
-            <div class="switch-row">
-                <div class="switch" id="switch-blue"></div>
-                <div class="switch" id="switch-red"></div>
-                <div class="switch" id="switch-yellow"></div>
-                <div class="switch" id="switch-green"></div>
-            </div>
-
-            <!-- Indicador de código (se muestra cuando se acierta) -->
+        <button id="validate-button">Validar Selección</button>
+        <div id="result-message"></div>
+    </section>
 
 
 
+
+
+
+    <!-- Script para la funcionalidad -->
     <script src="scripts.js"></script>
 </body>
 </html>
+

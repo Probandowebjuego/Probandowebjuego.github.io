@@ -123,7 +123,7 @@ if (validateButton) {
             if (selectedColors.sort().toString() === correctCombination.sort().toString()) {
                 resultMessage.textContent = "¡Correcto!";
                 setTimeout(() => {
-                    window.location.href = 'chapter2.html';
+                    window.location.href = 'chapter3.html';
                 }, 1500);
             } else {
                 resultMessage.textContent = "Combinación incorrecta. ¡Explosión!";
@@ -169,7 +169,7 @@ function validateSwitchOrder() {
         document.body.classList.add('light-on');
         resultMessage.textContent = "¡Correcto!";
         setTimeout(() => {
-            window.location.href = 'chapter3.html';
+            window.location.href = 'chapter2.html';
         }, 2000);
     } else {
         shakeScreen();
@@ -460,76 +460,96 @@ function rotateDial2(value) {
 
     // --- Chapter 8: Selección de Imagen, Número y Letra ---
 document.addEventListener('DOMContentLoaded', () => {
-    let selectedImage = '';
-    let selectedNumber = '';
-    let selectedLetter = '';
-
-    // Definir la combinación correcta
-    const correctImage = 'img3';  // Imagen correcta
-    const correctNumber = '4';    // Número correcto
-    const correctLetter = 'A';    // Letra correcta
-
+    const inputField = document.getElementById('code-input');
+    const numberButtons = document.querySelectorAll('.num-button');
+    const clearButton = document.getElementById('clear');
+    const submitButton = document.getElementById('submit-button');
     const resultMessage = document.getElementById('result-message');
 
-    // Función para comprobar el código
-    function checkCode() {
-        if (selectedImage && selectedNumber && selectedLetter) {
-            if (selectedImage === correctImage && selectedNumber === correctNumber && selectedLetter === correctLetter) {
-                resultMessage.textContent = "¡Código correcto!";
-                resultMessage.style.color = "green";
-                setTimeout(() => {
-                    window.location.href = 'chapter9.html';  // Redirige al siguiente capítulo
-                }, 2000);
-            } else {
-                resultMessage.textContent = "Código incorrecto. Intenta de nuevo.";
-                resultMessage.style.color = "red";
-                resetSelections();
+    let selectedImage = null;
+    let selectedSymbol = null;
+
+    // Image selection
+    const images = document.querySelectorAll('.image-choice');
+    images.forEach((image, index) => {
+        image.addEventListener('click', () => {
+            images.forEach(img => img.classList.remove('selected'));
+            image.classList.add('selected');
+            selectedImage = index + 1; // Assuming images are indexed 1 to 6
+        });
+    });
+
+    // Symbol selection
+    const symbols = document.querySelectorAll('.symbol-choice');
+    symbols.forEach((symbol, index) => {
+        symbol.addEventListener('click', () => {
+            symbols.forEach(sym => sym.classList.remove('selected'));
+            symbol.classList.add('selected');
+            selectedSymbol = index + 1; // Assuming symbols are indexed 1 to 6
+        });
+    });
+
+    // Add event listener to each number button
+    numberButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            if (inputField.value.length < 3) {
+                inputField.value += button.textContent;
             }
+        });
+    });
+
+    // Clear input field
+    clearButton.addEventListener('click', () => {
+        resetSelections();
+    });
+
+    // Handle submission
+    submitButton.addEventListener('click', () => {
+        const code = inputField.value;
+        if (selectedImage && selectedSymbol && code.length === 3) {
+            checkSolution(selectedImage, selectedSymbol, code); // Validate the combination
+        } else {
+            resultMessage.textContent = 'Please select an image, a symbol, and enter a 3-digit code.';
+        }
+    });
+
+    // Function to validate the solution
+    function checkSolution(image, symbol, code) {
+        const correctImage = 2; // The second image is correct
+        const correctSymbol = 4; // The fourth symbol is correct
+        const correctCode = '348'; // Correct 3-digit code
+
+        if (image === correctImage && symbol === correctSymbol && code === correctCode) {
+            resultMessage.textContent = 'Correct! You have solved the puzzle.';
+            resultMessage.style.color = 'green';
+        } else {
+            resultMessage.textContent = 'Wrong combination. Resetting...';
+            resultMessage.style.color = 'red';
+
+            // Reset the selections after a short delay
+            setTimeout(() => {
+                resetSelections();
+            }, 1500); // 1.5 second delay before resetting
         }
     }
 
-    // Función para reiniciar las selecciones
+    // Function to reset all selections
     function resetSelections() {
-        selectedImage = '';
-        selectedNumber = '';
-        selectedLetter = '';
+        // Clear input field and result message
+        inputField.value = '';
+        resultMessage.textContent = '';
 
-        // Quitar la selección visual
-        document.querySelectorAll('.code-image').forEach(img => img.classList.remove('selected'));
-        document.querySelectorAll('.code-number').forEach(num => num.classList.remove('selected'));
-        document.querySelectorAll('.code-letter').forEach(let => let.classList.remove('selected'));
+        // Remove selected class from images and symbols
+        images.forEach(img => img.classList.remove('selected'));
+        symbols.forEach(sym => sym.classList.remove('selected'));
+
+        // Reset selected variables
+        selectedImage = null;
+        selectedSymbol = null;
     }
-
-    // Manejar la selección de imágenes
-    document.querySelectorAll('.code-image').forEach(image => {
-        image.addEventListener('click', () => {
-            selectedImage = image.dataset.code;
-            document.querySelectorAll('.code-image').forEach(img => img.classList.remove('selected'));
-            image.classList.add('selected');
-            checkCode();
-        });
-    });
-
-    // Manejar la selección de números
-    document.querySelectorAll('.code-number').forEach(number => {
-        number.addEventListener('click', () => {
-            selectedNumber = number.dataset.code;
-            document.querySelectorAll('.code-number').forEach(num => num.classList.remove('selected'));
-            number.classList.add('selected');
-            checkCode();
-        });
-    });
-
-    // Manejar la selección de letras
-    document.querySelectorAll('.code-letter').forEach(letter => {
-        letter.addEventListener('click', () => {
-            selectedLetter = letter.dataset.code;
-            document.querySelectorAll('.code-letter').forEach(let => let.classList.remove('selected'));
-            letter.classList.add('selected');
-            checkCode();
-        });
-    });
 });
+
+
 
 
 
@@ -546,14 +566,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // Pistas para cada capítulo
     const hintsByChapter = {
         chapter1: [
+             'Pista 1: Mira el patrón de los interruptores.',
+            'Pista 2: Solo algunos deben estar arriba.',
+            'Pista 3: Intenta un orden que mezcle los colores primarios.'
+
+        ],
+        chapter2: [
             'Pista 1: Observa bien los colores.',
             'Pista 2: La combinación correcta tiene colores cálidos.',
             'Pista 3: Experimenta con las pociones naranjas y verdes.'
-        ],
-        chapter2: [
-            'Pista 1: Mira el patrón de los interruptores.',
-            'Pista 2: Solo algunos deben estar arriba.',
-            'Pista 3: Intenta un orden que mezcle los colores primarios.'
         ],
         chapter3: [
             'Pista 1: El código está relacionado con la palabra CURA.',
