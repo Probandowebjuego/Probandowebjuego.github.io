@@ -1,4 +1,80 @@
-/* Banner superior fijo */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #1e272e;
+    color: #ffffff;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* Contenedor del selector de idioma */
+/* Posicionamiento de selector de idioma */
+.language-selector {
+    top: 10px;
+    right: 10px;
+    display: flex;
+    gap: 10px;
+    position: absolute; /* Para asegurar que esté en la parte superior derecha */
+    z-index: 1000;
+}
+
+/* Botón principal del desplegable */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-button {
+    background-color: #007BFF;
+    color: white;
+    padding: 7px 25px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.dropdown-button:hover {
+    background-color: #0056b3; /* Efecto hover */
+}
+
+/* Estilos para el contenido desplegable */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 120px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    border-radius: 5px;
+    right: 0; /* Alinea el menú al borde derecho */
+}
+
+.dropdown-content button {
+    background-color: white;
+    color: black;
+    padding: 10px;
+    font-size: 14px;
+    border: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.dropdown-content button:hover {
+    background-color: #f1f1f1; /* Color de fondo al pasar el ratón */
+}
+
+/* Mostrar el menú cuando el botón es clicado */
+.show {
+    display: block;
+}
+
 /* Banner superior fijo */
 .banner-container {
     position: fixed;
@@ -54,18 +130,18 @@
 }
 
 .icon-button {
-    background-color: #3498db;  /* Color de fondo */
-    color: #ffffff;  /* Color del texto */
-    border: none;  /* Sin bordes */
-    padding: 12px 16px;  /* Aumenté el padding para un diseño más espacioso */
-    cursor: pointer;  /* Icono de cursor de mano */
-    border-radius: 12px;  /* Esquinas más redondeadas */
-    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;  /* Transiciones suaves */
-    font-size: 1.2rem;  /* Tamaño de fuente más grande */
-    display: flex;  /* Flexbox para alinear el contenido */
-    align-items: center;  /* Alineación vertical centrada */
-    justify-content: center;  /* Alineación horizontal centrada */
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);  /* Sombra suave alrededor del botón */
+    background-color: #3498db;
+    color: #ffffff;
+    border: none;
+    padding: 0px 0px;
+    cursor: pointer;
+    border-radius: 0px;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15); /* Sombra suave alrededor del botón */
 }
 
 .icon-button:hover {
@@ -78,7 +154,6 @@
     transform: translateY(2px);  /* Efecto de presionar hacia abajo cuando se hace clic */
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);  /* Sombra más suave cuando el botón está activo */
 }
-
 
 /* Modal de pistas */
 .modal {
@@ -153,6 +228,7 @@ ul#hints-list li {
 #show-next-hint:hover {
     background-color: #16a085;
 }
+
 
 
 
@@ -380,6 +456,7 @@ body.chapter2-bg, body.chapter3-bg, body.chapter6-bg {
     box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.5);
 }
 
+/* Botella seleccionada */
 .bottle.selected {
     border: 5px solid #ffffff;
     box-shadow: 0px 8px 20px rgba(255, 255, 255, 0.4);
@@ -402,6 +479,7 @@ body.chapter2-bg, body.chapter3-bg, body.chapter6-bg {
     }
 }
 
+/* Botella en estado de error (explosión) */
 .bottle.error {
     animation: explosion 0.6s ease forwards;
     background-color: #e74c3c; /* Rojo para representar la explosión */
@@ -411,38 +489,16 @@ body.chapter2-bg, body.chapter3-bg, body.chapter6-bg {
 
 /* Mensaje de resultado */
 #result-message {
-    font-size: 1.8rem;
+    font-size: 1.2rem;
     margin-top: 30px;
-    color: #ffffff;
+    color: black;
     text-align: center;
-    background-color: rgba(231, 76, 60, 0.8);
-    padding: 10px 20px;
+    background-color: white;
+    padding: 7px 20px;
     border-radius: 10px;
-    max-width: 80%;
-    margin: 20px auto;
+    max-width: 52%;
+    margin: 12px auto;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-    animation: pulse 1.5s infinite alternate;
-}
-
-/* Botón de validación */
-#validate-button {
-    display: block;
-    background-color: #27ae60;
-    color: white;
-    padding: 15px 30px;
-    font-size: 1.5rem;
-    margin: 30px auto;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 0 15px rgba(39, 174, 96, 0.6);
-}
-
-#validate-button:hover {
-    background-color: #2ecc71;
-    box-shadow: 0 8px 15px rgba(0, 255, 204, 0.8);
-    transform: scale(1.05);
 }
 
 /* Efecto de animación pulsante */
@@ -450,6 +506,141 @@ body.chapter2-bg, body.chapter3-bg, body.chapter6-bg {
     0% { transform: scale(1); }
     100% { transform: scale(1.05); }
 }
+/* Contenedor para las animaciones de humo y luces */
+#success-animation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 100;
+    display: none; /* Solo se mostrará cuando acierte */
+    overflow: hidden;
+}
+
+/* Humo */
+@keyframes smoke-rise {
+    0% {
+        opacity: 0;
+        transform: scale(0.5) translateY(50vh);
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        transform: scale(1.5) translateY(-50vh);
+    }
+}
+
+.smoke {
+    position: absolute;
+    bottom: 0;
+    width: 150px;
+    height: 150px;
+    background-color: rgba(200, 200, 200, 0.3);
+    border-radius: 50%;
+    animation: smoke-rise 4s ease-in-out infinite;
+    pointer-events: none;
+    filter: blur(10px);
+}
+
+.smoke:nth-child(2) {
+    left: 25%;
+    width: 180px;
+    height: 180px;
+    animation-duration: 6s;
+}
+
+.smoke:nth-child(3) {
+    left: 50%;
+    width: 120px;
+    height: 120px;
+    animation-duration: 5s;
+}
+
+.smoke:nth-child(4) {
+    left: 75%;
+    width: 200px;
+    height: 200px;
+    animation-duration: 7s;
+}
+
+/* Luces parpadeantes */
+@keyframes flash-light {
+    0%, 100% {
+        opacity: 0;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.5);
+    }
+}
+
+.flash-light {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300px;
+    height: 300px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    animation: flash-light 2s ease-in-out infinite;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    filter: blur(50px);
+    opacity: 0;
+}
+
+/* Efecto de burbujas pequeñas */
+@keyframes small-bubble-rise {
+    0% {
+        opacity: 0;
+        transform: translateY(100vh) scale(0.5);
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-20vh) scale(1.5);
+    }
+}
+
+.bubble-small {
+    position: absolute;
+    bottom: 0;
+    width: 50px;
+    height: 50px;
+    background-color: rgba(0, 255, 204, 0.5);
+    border-radius: 50%;
+    animation: small-bubble-rise 3s ease-in infinite;
+    pointer-events: none;
+}
+
+.bubble-small:nth-child(2) {
+    left: 10%;
+    width: 40px;
+    height: 40px;
+    animation-duration: 4s;
+}
+
+.bubble-small:nth-child(3) {
+    left: 30%;
+    width: 60px;
+    height: 60px;
+    animation-duration: 5s;
+}
+
+.bubble-small:nth-child(4) {
+    left: 70%;
+    width: 30px;
+    height: 30px;
+    animation-duration: 6s;
+}
+
 
 
 /* Chapter 2: Interruptores */
@@ -659,18 +850,7 @@ body.chapter3-bg {
 }
 
 /* Resultado de la validación */
-#result-message {
-    font-size: 1.8rem;
-    margin-top: 20px;
-    color: #e74c3c;
-    text-align: center;
-    background-color: rgba(231, 76, 60, 0.8);
-    padding: 10px 20px;
-    border-radius: 10px;
-    max-width: 80%;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-    animation: pulse 1.5s infinite alternate;
-}
+
 /* Contenedor general del capítulo */
 .chapter4-container {
     display: flex;
@@ -700,20 +880,74 @@ body.chapter3-bg {
     transform: scale(1.1);
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
 }
+/* Animación de la taquilla (una puerta) */
+.locker {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 150px;
+    height: 400px;
+    background-color: #2ecc71; /* Color verde para la taquilla */
+    border: 5px solid #fff;
+    border-radius: 10px;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    z-index: 999;
+    overflow: hidden;
+}
+
+.locker-door {
+    width: 100%;
+    height: 100%;
+    background-color: #27ae60; /* Color más oscuro para la puerta */
+    position: relative;
+    transform-origin: left; /* La puerta se abre desde la izquierda */
+    transition: transform 1s ease-in-out;
+}
+
+.locker.open .locker-door {
+    transform: rotateY(-120deg); /* Ángulo de apertura de la puerta */
+}
+
+/* Efecto de humo */
+.full-screen-smoke {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    overflow: hidden;
+}
+
+.smoke-cloud {
+    width: 150px;
+    height: 150px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    animation: smokeMove 5s ease-in-out infinite;
+    opacity: 0.8;
+}
+
+@keyframes smokeMove {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateY(-100px) scale(2);
+        opacity: 0;
+    }
+}
 
 /* Mensaje de resultado */
-#result-message {
-    font-size: 1.8rem;
-    margin-top: 30px;
-    color: #ffffff;
-    text-align: center;
-    background-color: rgba(231, 76, 60, 0.8);
-    padding: 10px 20px;
-    border-radius: 10px;
-    max-width: 80%;
-    margin: 20px auto;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-}
+
 
 /* Efecto de humo a pantalla completa */
 .full-screen-smoke {
@@ -837,12 +1071,7 @@ body.chapter3-bg {
 }
 
 /* Mensaje de resultado */
-#result-message {
-    font-size: 1.5rem;
-    margin-top: 20px;
-    color: #ffffff;
-    transition: color 0.5s ease-in-out;
-}
+
 
 /* Animación de luz verde si el código es correcto */
 @keyframes light-up {
@@ -884,9 +1113,7 @@ body.light-on .safe-container {
         height: 15px;
     }
 
-    #result-message {
-        font-size: 1.2rem;
-    }
+
 }
 
 /* Ajuste adicional para pantallas muy pequeñas */
@@ -912,9 +1139,7 @@ body.light-on .safe-container {
         height: 10px;
     }
 
-    #result-message {
-        font-size: 1rem;
-    }
+
 }
 
 
@@ -1021,6 +1246,71 @@ body.chapter6-bg {
         padding: 8px 16px;
     }
 }
+/* Animación específica para Capítulo 6 - Manuscrito e Idea */
+/* Animación específica para el éxito en el Capítulo 6 */
+#chapter6-success-animation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.8); /* Fondo claro */
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    overflow: hidden;
+}
+
+/* Efecto de partículas circulares que se expanden */
+.particle-effect {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-color: rgba(46, 204, 113, 0.8); /* Verde éxito */
+    border-radius: 50%;
+    animation: particle-expand 2s ease-out forwards;
+    box-shadow: 0 0 20px rgba(46, 204, 113, 0.5), 0 0 50px rgba(46, 204, 113, 0.3);
+}
+
+/* Keyframes para la expansión de las partículas */
+@keyframes particle-expand {
+    0% {
+        transform: scale(0.5);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(10);
+        opacity: 0;
+    }
+}
+
+/* Efecto de destello de luz */
+.flash-effect {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 70%);
+    opacity: 0;
+    animation: flash-animation 1.5s ease-out forwards;
+}
+
+/* Keyframes para el destello de luz */
+@keyframes flash-animation {
+    0% {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(1.5);
+    }
+}
+
 
 /* Chapter 7: Teclado numérico y ranuras */
 .container {
@@ -1094,7 +1384,7 @@ body.chapter6-bg {
 }
 
 #error-message {
-  color: red;
+  color: black;
   font-size: 1.2rem;
   margin-top: 20px;
   animation: shake 0.5s ease;
@@ -1149,224 +1439,349 @@ body.chapter6-bg {
     padding: 10px;
   }
 }
+/* Contenedor de la animación del ascensor */
+.elevator-animation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10000;
+  background-color: rgba(0, 0, 0, 0.8); /* Fondo oscuro para simular un entorno cerrado */
+  display: none;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; /* Ocultar cualquier desbordamiento */
+}
+
+/* Animación de descenso */
+@keyframes elevator-descend {
+  0% {
+    transform: translateY(0);
+  }
+  10% {
+    transform: translateY(5%) scale(1.02); /* Ligeramente hacia afuera */
+  }
+  90% {
+    transform: translateY(90%) scale(0.98); /* Ligeramente hacia adentro */
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+/* Vibración suave para simular el movimiento del ascensor */
+@keyframes elevator-shake {
+  0%, 100% {
+    transform: translate(0, 0);
+  }
+  20%, 80% {
+    transform: translate(-2px, 2px);
+  }
+  40%, 60% {
+    transform: translate(2px, -2px);
+  }
+}
+
+/* Efecto de luz en el ascensor (parpadeo de luces) */
+@keyframes light-flicker {
+  0%, 100% {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+  20%, 80% {
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+  40%, 60% {
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+}
+
+.elevator-moving {
+  animation: elevator-descend 3s ease-in-out forwards, light-flicker 1.5s infinite alternate ease-in-out;
+}
+
+/* Vibración ligera */
+.elevator-shaking {
+  animation: elevator-shake 0.3s infinite;
+}
 
 /* Chapter 8: Pantalla futurista */
-/* Chapter 8 - Retro Terminal Styles */
-.chapter8 body {
+/* Ajustes generales */
+.chapter8-body {
     font-family: 'Courier New', Courier, monospace;
-    background-color: #000000; /* Black background */
-    color: #00ff00; /* Green text */
+    background-color: #000; /* Fondo negro */
+    color: #00ff00; /* Texto verde */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 60px;
+    overflow-y: auto; /* Permitir desplazamiento vertical */
+    height: 100vh;
 }
 
-.chapter8 .puzzle-container {
-    width: 80%;
-    margin: 20px auto;
-    background-color: #000000;
+/* Puzzle Container */
+.puzzle-container {
+    background-color: #111;
     padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 15px #00ff00;
     border: 2px solid #00ff00;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 600px;
+    box-shadow: 0 0 10px #00ff00;
+    margin-top: 20px;
+    animation: glow 1s infinite alternate;
 }
 
-.chapter8 h3 {
-    color: #00ff00;
-    text-shadow: 0 0 10px #00ff00;
-    text-align: center;
+/* Animación retro de parpadeo */
+@keyframes glow {
+    from {
+        box-shadow: 0 0 10px #00ff00;
+    }
+    to {
+        box-shadow: 0 0 20px #00ff00;
+    }
 }
 
-.chapter8 .image-choice, .chapter8 .symbol-choice {
-    width: 100px;
-    height: 100px;
-    margin: 10px;
+/* Ajustes para la selección de letras */
+.letter-selection {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.letter-choice {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 5px;
+    font-size: 1.5rem; /* Tamaño de fuente reducido */
+    color: white;
+    background-color: #000;
+    border: 2px solid white;
     cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.letter-choice.selected {
+    background-color: #00cc00;
+    border-color: #00ff00;
+    transform: scale(1.1);
+    box-shadow: 0 0 10px #00ff00;
+}
+
+/* Ajustes para la selección de imágenes */
+.image-selection {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columnas */
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.image-choice {
+    width: 80px;
+    height: 80px;
+    cursor: pointer;
+    background-color: #222;
     border: 2px solid transparent;
-    filter: grayscale(100%);
     transition: transform 0.2s, border-color 0.2s;
 }
 
-.chapter8 .selected {
-    border: 2px solid #00ff00;
-    box-shadow: 0 0 10px #00ff00;
-    transform: scale(1.1);
+.image-choice img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
-.chapter8 .number-pad {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.image-choice.selected {
+    border: 2px solid #00ff00;
+    transform: scale(1.05);
+    box-shadow: 0 0 10px #00ff00;
+}
+
+/* Número de entrada */
+.number-pad {
+    text-align: center;
     margin-bottom: 20px;
 }
 
-.chapter8 input[type="text"] {
+input[type="text"] {
     font-size: 2rem;
-    color: #00ff00;
-    background-color: #000000;
     text-align: center;
-    width: 80px;
-    margin-bottom: 10px;
+    background-color: #000;
+    color: #00ff00;
     border: 2px solid #00ff00;
-    box-shadow: 0 0 10px #00ff00;
-}
-
-.chapter8 .num-keypad {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-}
-
-.chapter8 .num-button, .chapter8 #clear {
     padding: 10px;
-    background-color: #000000;
-    color: #00ff00;
-    font-size: 1.2rem;
-    border: 2px solid #00ff00;
-    cursor: pointer;
-    transition: background-color 0.3s, box-shadow 0.3s;
+    width: 80px;
+    margin-bottom: 20px;
 }
 
-.chapter8 .num-button:hover, .chapter8 #clear:hover {
-    background-color: #333333;
-    box-shadow: 0 0 15px #00ff00;
-}
-
-.chapter8 #submit-button {
-    background-color: #000000;
-    color: #00ff00;
-    padding: 10px 20px;
-    font-size: 1.2rem;
-    border: 2px solid #00ff00;
-    cursor: pointer;
-    margin-top: 20px;
-    transition: background-color 0.3s, box-shadow 0.3s;
-}
-
-.chapter8 #submit-button:hover {
-    background-color: #333333;
-    box-shadow: 0 0 20px #00ff00;
-}
-
-.chapter8 #result-message {
-    font-size: 1.2rem;
-    color: #00ff00;
-    text-align: center;
-    margin-top: 10px;
-    text-shadow: 0 0 10px #00ff00;
-}
-
-/* Special Retro Effect for Glowing Text */
-.chapter8 body::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle, rgba(0, 255, 0, 0.2), rgba(0, 0, 0, 1));
-    z-index: -1;
-}
-
-.chapter8 {
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
-
-/* Animating glitch effect for retrowave feel */
-@keyframes glitch {
-    0% { transform: translate(0, 0); }
-    20% { transform: translate(2px, -2px); }
-    40% { transform: translate(-2px, 2px); }
-    60% { transform: translate(2px, 2px); }
-    80% { transform: translate(-2px, -2px); }
-    100% { transform: translate(0, 0); }
-}
-
-.chapter8 .puzzle-container {
-    animation: glitch 1s infinite;
-}
-
-
-
-/* Number Pad */
-.chapter8 .num-keypad {
+/* Teclado numérico */
+.keypad {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 1fr); /* 3 columnas */
     gap: 10px;
-    margin-top: 20px;
 }
 
-.chapter8 .num-button, .chapter8 #clear {
+.num-button, .clear-button {
     padding: 15px;
-    background-color: #000000;
+    background-color: #222;
     color: #00ff00;
     font-size: 1.5rem;
-    border: 2px solid #00ff00;
     cursor: pointer;
-    transition: background-color 0.3s, box-shadow 0.3s;
-    text-align: center;
-}
-
-.chapter8 .num-button:hover, .chapter8 #clear:hover {
-    background-color: #333333;
-    box-shadow: 0 0 15px #00ff00;
-}
-
-.chapter8 input[type="text"] {
-    font-size: 2rem;
-    color: #00ff00;
-    background-color: #000000;
-    text-align: center;
-    width: 100px;
-    margin-bottom: 10px;
     border: 2px solid #00ff00;
-    box-shadow: 0 0 10px #00ff00;
-    outline: none;
+    text-align: center;
+    transition: background-color 0.3s;
 }
 
-.chapter8 #submit-button {
-    background-color: #000000;
+.num-button:hover, .clear-button:hover {
+    background-color: #333;
+}
+
+/* Botón de envío */
+#submit-button {
+    background-color: #222;
     color: #00ff00;
     padding: 10px 20px;
     font-size: 1.2rem;
     border: 2px solid #00ff00;
     cursor: pointer;
-    margin-top: 20px;
     transition: background-color 0.3s, box-shadow 0.3s;
+    margin-top: 20px;
 }
 
-.chapter8 #submit-button:hover {
-    background-color: #333333;
-    box-shadow: 0 0 20px #00ff00;
+#submit-button:hover {
+    background-color: #333;
+    box-shadow: 0 0 15px #00ff00;
 }
 
-.chapter8 #result-message {
-    font-size: 1.2rem;
-    color: #00ff00;
-    text-align: center;
-    margin-top: 10px;
-    text-shadow: 0 0 10px #00ff00;
+/* Mensajes */
+
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .letter-choice {
+        font-size: 1.2rem;
+        padding: 8px 15px;
+    }
+
+    .image-choice {
+        width: 60px;
+        height: 60px;
+    }
+
+    input[type="text"] {
+        width: 70px;
+        font-size: 1.5rem;
+    }
+
+    .num-button, .clear-button {
+        padding: 12px;
+        font-size: 1.3rem;
+    }
 }
 
-.selected {
-    border: 2px solid #00ff00;
-    box-shadow: 0 0 10px #00ff00;
+@media (max-width: 480px) {
+    .letter-choice {
+        font-size: 1rem;
+        padding: 5px 10px;
+    }
+
+    .image-choice {
+        width: 50px;
+        height: 50px;
+    }
+
+    input[type="text"] {
+        width: 60px;
+        font-size: 1.2rem;
+    }
+
+    .num-button, .clear-button {
+        padding: 10px;
+        font-size: 1.2rem;
+    }
 }
 
+/* Portal tridimensional */
+.portal-effect {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 1), rgba(0, 0, 255, 0.4), rgba(0, 0, 0, 0));
+  box-shadow: 0 0 30px rgba(0, 255, 255, 0.6), inset 0 0 50px rgba(255, 255, 255, 0.5);
+  opacity: 0;
+  z-index: 10000;
+  animation: portal-activate 5s ease-in-out forwards;
+  display: none; /* Oculto hasta que se active */
+}
+
+@keyframes portal-activate {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+    box-shadow: 0 0 0px rgba(0, 255, 255, 0.6);
+  }
+  50% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.5);
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.6);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(3);
+    box-shadow: 0 0 80px rgba(0, 255, 255, 1);
+  }
+}
+
+/* Efecto de desvanecimiento a la siguiente pantalla */
+.fade-to-next {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(135deg, rgba(0, 255, 255, 0.3), rgba(255, 0, 255, 0.3));
+  opacity: 0;
+  z-index: 9999;
+  animation: fade-to-next 4s ease forwards;
+  display: none;
+}
+
+@keyframes fade-to-next {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Efecto de sacudida para código incorrecto */
+@keyframes shake {
+  0%, 100% {
+    transform: translate(0, 0);
+  }
+  20%, 60% {
+    transform: translate(-10px, 10px);
+  }
+  40%, 80% {
+    transform: translate(10px, -10px);
+  }
+}
+
+.shake {
+  animation: shake 0.4s;
+}
 
 
 /* General */
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: #1e272e;
-    color: #ffffff;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
+
 
 .chapter4-bg {
     background-color: #1e272e;
@@ -1398,18 +1813,7 @@ body {
 }
 
 /* Mensaje de resultado */
-#result-message {
-    font-size: 1.8rem;
-    margin-top: 30px;
-    color: #ffffff;
-    text-align: center;
-    background-color: rgba(231, 76, 60, 0.8);
-    padding: 10px 20px;
-    border-radius: 10px;
-    max-width: 80%;
-    margin: 20px auto;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-}
+
 
 /* Efecto de humo */
 .full-screen-smoke {

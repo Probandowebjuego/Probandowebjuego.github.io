@@ -1,7 +1,3 @@
-
-
-
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -12,52 +8,60 @@
 </head>
 <body class="chapter2-bg">
 
- <!-- Banner fijo con temporizador y botón de pistas -->
+    <!-- Selector de idioma -->
+
+
+    <!-- Banner fijo con temporizador y botón de pistas -->
     <div class="banner-container">
         <!-- Botón de pistas a la izquierda -->
         <button id="hint-button" class="hint-button">💡 Ver Pistas</button>
 
         <!-- Temporizador a la derecha con botones en la misma línea -->
         <div class="timer-container">
-            <span id="time">45:39</span>
+            <span id="time"></span>
             <div class="timer-buttons">
                 <button id="pause-button" class="icon-button">⏸️</button>
                 <button id="reset-button" class="icon-button">🔄</button>
             </div>
         </div>
+ <div class="dropdown">
+    <button class="dropdown-button">🌐 Idioma</button>
+    <div class="dropdown-content language-selector">
+        <button data-lang="es">Español</button>
+        <button data-lang="en">English</button>
+    </div>
+</div>
+
+
+
+    </div>
+</div>
     </div>
 
     <!-- Modal de Pistas -->
-    <div id="hint-modal" class="modal">
-        <div class="modal-content">
-            <span id="close-hint" class="close">&times;</span>
-            <h2>Pistas</h2>
-            <ul id="hints-list">
-                <!-- Las pistas se agregarán aquí -->
-            </ul>
-            <button id="show-next-hint">Mostrar Siguiente Pista</button>
-        </div>
+ <div id="hint-modal" class="modal">
+    <div class="modal-content">
+        <span id="close-hint" class="close">&times;</span>
+        <h2 id="hints-title">Pistas</h2>
+        <ul id="hints-list"></ul>
+        <button id="show-next-hint">Mostrar Siguiente Pista</button>
     </div>
-
-
+</div>
 
     <!-- Contenedor de la luz tenue -->
     <div class="light-dim">
-<div id="result-message"></div>
-        </div>
+        <div id="result-message"></div><br><br><br><br>
     </div>
 
-        <!-- Panel de control de interruptores -->
-        <div class="panel-container">
-            <div class="switch-row">
-                <div class="switch" id="switch-blue"></div>
-                <div class="switch" id="switch-red"></div>
-                <div class="switch" id="switch-yellow"></div>
-                <div class="switch" id="switch-green"></div>
-            </div>
-
-            <!-- Indicador de código (se muestra cuando se acierta) -->
-
+    <!-- Panel de control de interruptores -->
+    <div class="panel-container">
+        <div class="switch-row">
+            <div class="switch" id="switch-blue"></div>
+            <div class="switch" id="switch-red"></div>
+            <div class="switch" id="switch-yellow"></div>
+            <div class="switch" id="switch-green"></div>
+        </div>
+    </div>
 
 
     <script src="scripts.js"></script>

@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chapter 6 - Escape Room</title>
+    <title>Chapter 8 - Escape Room</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
- <!-- Banner fijo con temporizador y botón de pistas -->
+<body class="chapter8-body">
+    <!-- Banner fijo con temporizador y botón de pistas -->
     <div class="banner-container">
         <!-- Botón de pistas a la izquierda -->
         <button id="hint-button" class="hint-button">💡 Ver Pistas</button>
@@ -20,6 +20,15 @@
                 <button id="reset-button" class="icon-button">🔄</button>
             </div>
         </div>
+ <div class="dropdown">
+    <button class="dropdown-button">🌐 Idioma</button>
+    <div class="dropdown-content language-selector">
+        <button data-lang="es">Español</button>
+        <button data-lang="en">English</button>
+    </div>
+</div>
+
+
     </div>
 
     <!-- Modal de Pistas -->
@@ -34,64 +43,67 @@
         </div>
     </div>
 
-
-
- <div class="chapter8">
-    <!-- Retro terminal content here -->
-    <div class="puzzle-container">
-        <h3>Select the Correct Image</h3>
-        <div class="image-selection">
-            <!-- Image options -->
-            <img src="image1.png" class="image-choice" alt="image1">
-            <img src="image2.png" class="image-choice" alt="image2">
-            <img src="image3.png" class="image-choice" alt="image3">
-            <img src="image4.png" class="image-choice" alt="image4">
-            <img src="imag5.png" class="image-choice" alt="image5">
-            <img src="image6.png" class="image-choice" alt="image6">
-            <!-- more images -->
-        </div>
-
-        <h3>Select the Symbol</h3>
-        <div class="symbol-selection">
-            <!-- Symbol options -->
-            <img src="symbol1.png" class="symbol-choice" alt="symbol1">
-            <img src="symbol2.png" class="symbol-choice" alt="symbol2">
-             <img src="symbol3.png" class="symbol-choice" alt="symbol3">
-              <img src="symbol4.png" class="symbol-choice" alt="symbol4">
-               <img src="symbol5.png" class="symbol-choice" alt="symbol5">
-                <img src="symbol6.png" class="symbol-choice" alt="symbol6">
-            <!-- more symbols -->
-        </div>
-
-        <h3>Enter the 3-Digit Code</h3>
-      <div class="number-pad">
-            <input type="text" maxlength="3" id="code-input" readonly>
-            <div class="num-keypad">
-                <button class="num-button">1</button>
-                <button class="num-button">2</button>
-                <button class="num-button">3</button>
-                <button class="num-button">4</button>
-                <button class="num-button">5</button>
-                <button class="num-button">6</button>
-                <button class="num-button">7</button>
-                <button class="num-button">8</button>
-                <button class="num-button">9</button>
-                <button class="num-button">0</button>
-                <button id="clear">Clear</button>
+    <!-- Contenido del Capítulo 8 -->
+    <div class="chapter8">
+        <div class="puzzle-container">
+            <!-- Sección de letras -->
+            <h3>Selecciona una Letra</h3>
+            <div class="letter-selection">
+                <div class="letter-choice" data-value="A">A</div>
+                <div class="letter-choice" data-value="B">B</div>
+                <div class="letter-choice" data-value="C">C</div>
+                <div class="letter-choice" data-value="D">D</div>
+                <div class="letter-choice" data-value="G">G</div>
+                <div class="letter-choice" data-value="F">F</div>
             </div>
+
+            <!-- Sección de imágenes -->
+            <h3>Selecciona una Imagen</h3>
+            <div class="image-selection">
+                <div class="image-choice" data-value="img1">
+                    <img src="images/symbol1.png" alt="Imagen 1">
+                </div>
+                <div class="image-choice" data-value="img2">
+                    <img src="images/symbol2.png" alt="Imagen 2">
+                </div>
+                <div class="image-choice" data-value="img3">
+                    <img src="images/symbol3.png" alt="Imagen 3">
+                </div>
+                <div class="image-choice" data-value="img4">
+                    <img src="images/symbol4.png" alt="Imagen 4">
+                </div>
+                <div class="image-choice" data-value="img5">
+                    <img src="images/symbol5.png" alt="Imagen 5">
+                </div>
+                <div class="image-choice" data-value="img6">
+                    <img src="images/symbol6.png" alt="Imagen 6">
+                </div>
+            </div>
+
+            <!-- Sección de código numérico -->
+            <h3>Ingresa el Código</h3>
+            <div class="number-pad">
+                <input type="text" id="code-input" maxlength="3" readonly />
+                <div class="keypad">
+                    <div class="num-button">1</div>
+                    <div class="num-button">2</div>
+                    <div class="num-button">3</div>
+                    <div class="num-button">4</div>
+                    <div class="num-button">5</div>
+                    <div class="num-button">6</div>
+                    <div class="num-button">7</div>
+                    <div class="num-button">8</div>
+                    <div class="num-button">9</div>
+                    <div class="num-button">0</div>
+                    <div class="clear-button" id="clear">C</div>
+                </div>
+            </div>
+
+            <button id="submit-button">Submit</button>
+            <div id="result-message"></div>
         </div>
-
-        <button id="submit-button">Submit</button>
-
-        <div id="result-message"></div>
     </div>
-</div>
 
-
-
-
-
-
-<script src="scripts.js"></script>
+    <script src="scripts.js"></script>
 </body>
 </html>

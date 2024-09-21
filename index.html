@@ -3,30 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Escape Room - Introducción</title>
-    <!-- Enlace al archivo de CSS -->
+    <title id="page-title">Escape Room - Introducción</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
- <div id="particles-js"></div>
-    <!-- Fondo borroso y partículas -->
+
+    <div id="particles-js"></div>
+    <div class="banner-container">
+        <div class="dropdown">
+        <button class="dropdown-button">🌐 Idioma</button>
+        <div class="dropdown-content language-selector">
+            <button data-lang="es">Español</button>
+            <button data-lang="en">English</button>
+        </div>
+    </div>
+
+    </div>
+
     <div class="background"></div>
 
-
-    <!-- Sección de introducción -->
     <section id="intro-section">
-      <div class="intro-container">
-    <h1 id="title">Escape Room Challenge</h1>
-    <p id="subtitle">Un viaje lleno de enigmas y aventuras te espera.</p>
-    <button id="start-button">Comenzar la Aventura</button>
-</div>
-
+        <div class="intro-container">
+            <h1 id="title">Escape Room Challenge</h1>
+            <p id="subtitle">Un viaje lleno de enigmas y aventuras te espera.</p>
+            <button id="start-button">Comenzar la Aventura</button>
+        </div>
     </section>
 
-    <!-- Scripts para la funcionalidad -->
-    <!-- Partículas -->
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <!-- JavaScript propio -->
     <script src="scripts.js"></script>
 </body>
 </html>

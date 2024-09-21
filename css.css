@@ -1,0 +1,168 @@
+/* Estilos generales */
+body {
+    margin: 0;
+    padding: 0;
+    background-color: black;
+    overflow: hidden;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Contenedor del portal */
+.portal-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    position: relative;
+    z-index: 10;
+}
+
+.portal-frame {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 0 50px rgba(0, 255, 255, 0.8);
+    position: relative;
+    transition: transform 1.5s ease-in-out, opacity 1.5s ease-in-out;
+    z-index: 10;
+    background-color: rgba(0, 255, 255, 0.2);
+}
+
+.portal-frame.active {
+    transform: scale(10);
+    opacity: 0;
+    transition: transform 2s ease-in-out, opacity 1.5s ease-in-out;
+}
+
+.portal-frame video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Fondo de estrellas generado por partículas */
+#particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 2s ease-in-out;
+}
+
+.particle {
+    position: absolute;
+    background-color: white;
+    border-radius: 50%;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
+    animation: blink 3s infinite ease-in-out;
+    opacity: 0.8;
+}
+
+@keyframes blink {
+    0% { opacity: 0; }
+    50% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+/* Créditos */
+.credits {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    color: white;
+    text-align: center;
+    z-index: 20;
+    font-size: 2rem;
+    transition: opacity 2s ease-in-out;
+}
+
+.show-credits {
+    opacity: 1;
+    transition: opacity 2s ease-in-out;
+}
+
+.credits h2 {
+    margin: 0;
+    font-size: 2.5rem;
+    text-shadow: 0 0 20px #fff;
+}
+
+.credits p {
+    margin: 10px 0;
+    font-size: 1.2rem;
+}
+
+.credits a {
+    color: #1abc9c;
+    text-decoration: none;
+}
+
+.credits a:hover {
+    text-decoration: underline;
+}
+
+/* Efectos de partículas dinámicas */
+.spark {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background-color: #fff;
+    border-radius: 50%;
+    animation: sparkMove 1.5s linear infinite;
+}
+
+@keyframes sparkMove {
+    0% { transform: translateY(0) translateX(0); }
+    100% { transform: translateY(-100px) translateX(100px); }
+}
+
+/* Efecto de onda (ripple) al hacer clic en el portal */
+.ripple {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.3);
+    animation: rippleEffect 1s ease-out;
+}
+
+@keyframes rippleEffect {
+    0% { transform: scale(0.5); opacity: 1; }
+    100% { transform: scale(3); opacity: 0; }
+}
+
+/* Efecto de velocidad luz */
+#light-speed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.8) 50%, rgba(255, 255, 255, 0) 100%);
+    opacity: 0;
+    z-index: 15;
+}
+
+@keyframes lightSpeed {
+    0% { transform: scale(1); opacity: 0; }
+    50% { opacity: 1; transform: scale(1.5); }
+    100% { opacity: 0; transform: scale(2); }
+}
+
+.light-speed-effect {
+    animation: lightSpeed 3s ease-in-out;
+}
+
+/* Créditos con zoom */
+@keyframes creditsZoom {
+    0% { transform: scale(0.5) translate(-50%, -50%); opacity: 0; }
+    100% { transform: scale(1) translate(-50%, -50%); opacity: 1; }
+}
